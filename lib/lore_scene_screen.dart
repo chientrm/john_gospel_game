@@ -1,6 +1,6 @@
-import 'package:mypa/lore_data.dart';
-import 'package:mypa/lore_scene.dart';
-import 'package:mypa/screen.dart';
+import 'package:john_gospel_game/lore_data.dart';
+import 'package:john_gospel_game/lore_scene.dart';
+import 'package:john_gospel_game/screen.dart';
 
 class LoreSceneScreen extends Screen {
   final int sceneIndex;

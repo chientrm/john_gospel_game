@@ -2,9 +2,9 @@ import 'dart:ffi' as ffi;
 import 'dart:io';
 
 import 'package:ffi/ffi.dart';
-import 'package:mypa/main_menu_screen.dart';
-import 'package:mypa/screen.dart';
-import 'package:mypa/sdl_bindings.dart';
+import 'package:john_gospel_game/main_menu_screen.dart';
+import 'package:john_gospel_game/screen.dart';
+import 'package:john_gospel_game/sdl_bindings.dart';
 
 void main() {
   final title = 'Christian Lore Game'.toNativeUtf8();

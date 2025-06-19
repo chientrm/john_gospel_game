@@ -1,7 +1,7 @@
 import 'dart:ffi' as ffi;
 import 'package:ffi/ffi.dart';
-import 'package:mypa/sdl_bindings.dart';
-import 'package:mypa/lore_data.dart';
+import 'package:john_gospel_game/sdl_bindings.dart';
+import 'package:john_gospel_game/lore_data.dart';
 
 void showLoreScene(int sceneIndex) {
   if (sceneIndex < 0 || sceneIndex >= loreScenes.length) return;
