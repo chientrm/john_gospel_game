@@ -62,15 +62,15 @@ class MainMenuScreen extends Screen {
 
   @override
   Screen? onKey(int key) {
-    // Up: 273, Down: 274, Enter: 13
-    if (key == 273) {
+    // Up: 1073741906, Down: 1073741905, Enter: 13
+    if (key == 1073741906) {
       return MainMenuScreen(
         selectedIndex:
             (selectedIndex - 1 + johnGospelScenes.length) %
             johnGospelScenes.length,
       );
     }
-    if (key == 274) {
+    if (key == 1073741905) {
       return MainMenuScreen(
         selectedIndex: (selectedIndex + 1) % johnGospelScenes.length,
       );
