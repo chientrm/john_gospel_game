@@ -144,11 +144,12 @@ void drawTextCentered(
   int colorR,
   int colorG,
   int colorB,
-  int colorA,
-) {
+  int colorA, {
+  int width = 1280, // default to new window width
+}) {
   final ptr = text.toNativeUtf8();
   int textWidth = measureTextWidth(ptr.cast<ffi.Int8>());
-  int x = (800 - textWidth) ~/ 2;
+  int x = (width - textWidth) ~/ 2;
   drawText(ptr.cast<ffi.Int8>(), x, y, colorR, colorG, colorB, colorA);
   calloc.free(ptr);
 }

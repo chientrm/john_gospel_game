@@ -11,21 +11,38 @@ class MainMenuScreen extends Screen {
   void render() {
     clearScreen(24, 24, 48, 255);
     // Draw a box for the title area
-    drawBox(100, 40, 600, 70, 40, 40, 80, 200);
+    drawBox(340, 40, 600, 70, 40, 40, 80, 200); // Centered for 1280 width
     // Title (centered)
-    drawTextCentered('Christian Lore Game', 60, 255, 255, 255, 255);
+    drawTextCentered(
+      'Christian Lore Game',
+      80,
+      255,
+      255,
+      255,
+      255,
+      width: 1280,
+    );
     // Subtitle (centered)
-    drawTextCentered('Discover, Learn, and Play!', 120, 180, 200, 255, 255);
-    // Prompt (centered, near bottom)
+    drawTextCentered(
+      'Discover, Learn, and Play!',
+      160,
+      180,
+      200,
+      255,
+      255,
+      width: 1280,
+    );
+    // Prompt (centered, near top)
     drawTextCentered(
       'Select a lore scene with ↑/↓, Enter to start',
-      170,
+      210,
       200,
       255,
       200,
       255,
+      width: 1280,
     );
-    int y = 220;
+    int y = 270;
     for (int i = 0; i < johnGospelScenes.length; i++) {
       final color =
           i == selectedIndex ? [255, 255, 180, 255] : [180, 200, 255, 255];
@@ -36,6 +53,7 @@ class MainMenuScreen extends Screen {
         color[1],
         color[2],
         color[3],
+        width: 1280,
       );
       y += 36;
     }

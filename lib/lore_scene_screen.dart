@@ -16,29 +16,38 @@ class LoreSceneScreen extends Screen {
     final scene = johnGospelScenes[sceneIndex];
 
     clearScreen(32, 32, 48, 255);
-    drawTextCentered(scene.title, 40, 255, 255, 255, 255);
-    drawHLine(100, 700, 80, 255, 255, 255, 255);
-    drawBox(60, 100, 680, 220, 40, 40, 60, 180);
+    drawTextCentered(
+      scene.title,
+      60,
+      255,
+      255,
+      255,
+      255,
+      width: 1280,
+    ); // Higher for widescreen
+    drawHLine(200, 1080, 110, 255, 255, 255, 255); // Wider line
+    drawBox(180, 140, 920, 260, 40, 40, 60, 180); // Wider box
 
     if (recitationStep == -1) {
       // Show intro text
-      drawWrappedText(scene.text, 80, 120, 640, 32, 220, 220, 255, 255);
+      drawWrappedText(scene.text, 200, 170, 880, 36, 220, 220, 255, 255);
       drawTextCentered(
         '(Press any key to begin recitation)',
-        320,
-        180,
+        440,
         220,
         255,
         255,
+        255,
+        width: 1280,
       );
     } else if (scene.recitationSteps.isNotEmpty &&
         recitationStep < scene.recitationSteps.length) {
       drawWrappedText(
         scene.recitationSteps[recitationStep],
-        80,
-        120,
-        640,
-        32,
+        200,
+        170,
+        880,
+        36,
         220,
         220,
         255,
@@ -46,18 +55,19 @@ class LoreSceneScreen extends Screen {
       );
       String progress =
           'Step ${recitationStep + 1} of ${scene.recitationSteps.length}';
-      drawTextCentered(progress, 320, 180, 220, 255, 255);
+      drawTextCentered(progress, 500, 220, 255, 255, 255, width: 1280);
       drawTextCentered(
         '(Press any key for next step)',
-        370,
-        180,
+        540,
         220,
         255,
         255,
+        255,
+        width: 1280,
       );
     } else if (scene.summary.isNotEmpty) {
       // After recitation, show summary if available
-      drawWrappedText(scene.summary, 80, 120, 640, 32, 180, 255, 180, 255);
+      drawWrappedText(scene.summary, 200, 170, 880, 36, 180, 255, 180, 255);
       String choiceHint = '';
       if (scene.choices.isNotEmpty) {
         choiceHint =
@@ -66,11 +76,19 @@ class LoreSceneScreen extends Screen {
       } else {
         choiceHint = "Press 'r' to restart or 'q' to quit";
       }
-      drawTextCentered('($choiceHint)', 370, 180, 180, 255, 180);
+      drawTextCentered('($choiceHint)', 600, 180, 255, 180, 255, width: 1280);
     } else {
       // After recitation, show choices
-      drawTextCentered('Choose an option:', 320, 255, 255, 180, 255);
-      int y = 350;
+      drawTextCentered(
+        'Choose an option:',
+        500,
+        255,
+        255,
+        180,
+        255,
+        width: 1280,
+      );
+      int y = 560;
       for (var i = 0; i < scene.choices.length; i++) {
         drawTextCentered(
           "[${i + 1}] ${scene.choices[i].label}",
@@ -79,6 +97,7 @@ class LoreSceneScreen extends Screen {
           255,
           180,
           255,
+          width: 1280,
         );
         y += 50;
       }
