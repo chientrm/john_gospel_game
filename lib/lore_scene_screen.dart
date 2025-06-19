@@ -30,7 +30,7 @@ class LoreSceneScreen extends Screen {
 
     if (recitationStep == -1) {
       // Show intro text
-      drawWrappedText(scene.text, 200, 170, 880, 36, 220, 220, 255, 255);
+      drawWrappedText(scene.intro, 200, 170, 880, 36, 220, 220, 255, 255);
       drawTextCentered(
         "(Press any key to begin recitation, 'q' to quit)",
         440,

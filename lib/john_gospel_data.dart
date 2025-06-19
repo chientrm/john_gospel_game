@@ -5,43 +5,57 @@ final List<LoreScene> johnGospelScenes = [
   // Prologue
   LoreScene(
     title: 'Prologue: The Word Became Flesh',
-    text:
+    intro:
         'Welcome to the beginning of John’s Gospel. Here, you’ll discover the mystery of the Word—Jesus—who existed from the very start and came to live among us.',
     summary:
         'Summary: Jesus, the eternal Word, became flesh and lived among us, revealing God’s glory and grace.',
     choices: [LoreChoice(label: 'Continue', nextSceneIndex: 1)],
     recitationSteps: [
       'In the beginning was the Word, and the Word was with God, and the Word was God. (John 1:1, NIV)',
+      'He was with God in the beginning. (John 1:2, NIV)',
+      'Through him all things were made; without him nothing was made that has been made. (John 1:3, NIV)',
+      'In him was life, and that life was the light of all mankind. (John 1:4, NIV)',
+      'The light shines in the darkness, and the darkness has not overcome it. (John 1:5, NIV)',
       'The Word became flesh and made his dwelling among us. We have seen his glory, the glory of the one and only Son, who came from the Father, full of grace and truth. (John 1:14, NIV)',
     ],
   ),
   LoreScene(
     title: 'The Testimony of John the Baptist',
-    text:
+    intro:
         'John the Baptist’s mission was to prepare the way for someone greater. In this scene, witness how he points everyone to Jesus.',
     summary:
         'Summary: John the Baptist identifies Jesus as the Lamb of God who takes away the sin of the world.',
     choices: [LoreChoice(label: 'Continue', nextSceneIndex: 2)],
     recitationSteps: [
-      'The next day John saw Jesus coming toward him and said, “Look, the Lamb of God, who takes away the sin of the world!” (John 1:29, NIV)',
+      'There was a man sent from God whose name was John. (John 1:6, NIV)',
+      'He came as a witness to testify concerning that light, so that through him all might believe. (John 1:7, NIV)',
+      'He himself was not the light; he came only as a witness to the light. (John 1:8, NIV)',
+      'John replied in the words of Isaiah the prophet, “I am the voice of one calling in the wilderness, ‘Make straight the way for the Lord.’” (John 1:23, NIV)',
+      'John saw Jesus coming toward him and said, “Look, the Lamb of God, who takes away the sin of the world!” (John 1:29, NIV)',
       'I have seen and I testify that this is God’s Chosen One.” (John 1:34, NIV)',
     ],
   ),
   LoreScene(
     title: 'The First Disciples',
-    text:
+    intro:
         'Meet the first people who chose to follow Jesus. Their journey begins with curiosity and a simple invitation.',
     summary:
         'Summary: The first disciples follow Jesus and begin their journey of faith.',
     choices: [LoreChoice(label: 'Continue', nextSceneIndex: 3)],
     recitationSteps: [
+      'The next day John was there again with two of his disciples. (John 1:35, NIV)',
+      'When he saw Jesus passing by, he said, “Look, the Lamb of God!” (John 1:36, NIV)',
+      'When the two disciples heard him say this, they followed Jesus. (John 1:37, NIV)',
       'Turning around, Jesus saw them following and asked, “What do you want?” ... “Come,” he replied, “and you will see.” (John 1:38-39, NIV)',
+      'So they went and saw where he was staying, and they spent that day with him. (John 1:39, NIV)',
       'Andrew, Simon Peter’s brother, was one of the two who heard what John had said and who had followed Jesus. (John 1:40, NIV)',
+      'The first thing Andrew did was to find his brother Simon and tell him, “We have found the Messiah” (that is, the Christ). (John 1:41, NIV)',
+      'And he brought him to Jesus. (John 1:42, NIV)',
     ],
   ),
   LoreScene(
     title: 'Sign 1: Water into Wine',
-    text:
+    intro:
         'At a wedding in Cana, a problem arises—and Jesus’ first miracle reveals his glory in an unexpected way.',
     summary:
         'Summary: Jesus performs his first miracle, turning water into wine, revealing his glory.',
@@ -53,7 +67,7 @@ final List<LoreScene> johnGospelScenes = [
   ),
   LoreScene(
     title: 'Sign 2: Healing the Official’s Son',
-    text:
+    intro:
         'A desperate father seeks Jesus for help. See how faith and Jesus’ word bring healing—even from a distance.',
     summary:
         'Summary: Jesus heals a royal official’s son by his word, demonstrating his authority and power.',
@@ -65,7 +79,7 @@ final List<LoreScene> johnGospelScenes = [
   ),
   LoreScene(
     title: 'Sign 3: Healing at Bethesda',
-    text:
+    intro:
         'By the pool of Bethesda, a man waits for healing. Jesus approaches and changes his life forever.',
     summary:
         'Summary: Jesus heals a man at Bethesda, showing his compassion and authority over the Sabbath.',
@@ -77,7 +91,7 @@ final List<LoreScene> johnGospelScenes = [
   ),
   LoreScene(
     title: 'Sign 4: Feeding the 5,000',
-    text:
+    intro:
         'A huge crowd is hungry, but resources are few. Watch as Jesus provides more than enough for everyone.',
     summary:
         'Summary: Jesus feeds five thousand, demonstrating his power to provide and his compassion for the crowd.',
@@ -89,7 +103,7 @@ final List<LoreScene> johnGospelScenes = [
   ),
   LoreScene(
     title: 'Sign 5: Walking on Water',
-    text:
+    intro:
         'The disciples are caught in a storm on the lake. Jesus comes to them in a way that defies nature itself.',
     summary:
         'Summary: Jesus walks on water, revealing his divine authority over nature and calming his disciples’ fears.',
@@ -101,7 +115,7 @@ final List<LoreScene> johnGospelScenes = [
   ),
   LoreScene(
     title: 'Sign 6: Healing the Man Born Blind',
-    text:
+    intro:
         'A man born blind encounters Jesus. This meeting will change his life and reveal who Jesus truly is.',
     summary:
         'Summary: Jesus heals a man born blind, showing that he is the light of the world.',
@@ -113,7 +127,7 @@ final List<LoreScene> johnGospelScenes = [
   ),
   LoreScene(
     title: 'Sign 7: Raising Lazarus',
-    text:
+    intro:
         'Lazarus has died, and his family mourns. Jesus arrives and demonstrates his power over death itself.',
     summary:
         'Summary: Jesus raises Lazarus from the dead, revealing his power over life and death.',
@@ -126,7 +140,7 @@ final List<LoreScene> johnGospelScenes = [
   // Book of Glory
   LoreScene(
     title: 'The Last Supper',
-    text:
+    intro:
         'On the night before his death, Jesus gathers with his disciples for a final meal and a lesson in humility.',
     summary:
         'Summary: At the Last Supper, Jesus demonstrates servant leadership and commands his disciples to love one another.',
@@ -138,7 +152,7 @@ final List<LoreScene> johnGospelScenes = [
   ),
   LoreScene(
     title: 'Farewell Discourses',
-    text:
+    intro:
         'Jesus prepares his disciples for what is to come, offering comfort, hope, and a promise of the Holy Spirit.',
     summary:
         'Summary: Jesus comforts his disciples, promises the Holy Spirit, and prays for all believers.',
@@ -150,7 +164,7 @@ final List<LoreScene> johnGospelScenes = [
   ),
   LoreScene(
     title: 'The Passion',
-    text:
+    intro:
         'Jesus faces betrayal, suffering, and death, fulfilling his mission to save the world.',
     summary:
         'Summary: Jesus willingly suffers, is crucified, and is buried to fulfill God’s plan of salvation.',
@@ -162,7 +176,7 @@ final List<LoreScene> johnGospelScenes = [
   ),
   LoreScene(
     title: 'The Resurrection',
-    text:
+    intro:
         'The tomb is empty! Jesus is alive, and his followers encounter the risen Lord.',
     summary:
         'Summary: Jesus rises from the dead, appearing to Mary Magdalene and his disciples, bringing hope and new life.',
@@ -175,7 +189,7 @@ final List<LoreScene> johnGospelScenes = [
   // Epilogue
   LoreScene(
     title: 'Epilogue: By the Sea',
-    text:
+    intro:
         'After his resurrection, Jesus appears to his disciples by the sea and restores Peter’s calling.',
     summary:
         'Summary: Jesus restores Peter and calls his disciples to follow him and care for his people.',
