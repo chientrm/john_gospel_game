@@ -2,6 +2,7 @@ import 'package:john_gospel_game/john_gospel_data.dart';
 import 'package:john_gospel_game/screen.dart';
 import 'package:john_gospel_game/sdl_bindings.dart';
 import 'package:john_gospel_game/text_rendering.dart' show drawWrappedText;
+import 'package:john_gospel_game/main_menu_screen.dart';
 
 class LoreSceneScreen extends Screen {
   final int sceneIndex;
@@ -57,7 +58,15 @@ class LoreSceneScreen extends Screen {
     } else if (scene.summary.isNotEmpty) {
       // After recitation, show summary if available
       drawWrappedText(scene.summary, 80, 120, 640, 32, 180, 255, 180, 255);
-      drawTextCentered('(Press any key to continue)', 370, 180, 180, 255, 180);
+      String choiceHint = '';
+      if (scene.choices.isNotEmpty) {
+        choiceHint =
+            "Press 'r' to restart, 'q' to quit, or "
+            "${scene.choices.length == 1 ? "'1' to continue" : "a number to choose"}";
+      } else {
+        choiceHint = "Press 'r' to restart or 'q' to quit";
+      }
+      drawTextCentered('($choiceHint)', 370, 180, 180, 255, 180);
     } else {
       // After recitation, show choices
       drawTextCentered('Choose an option:', 320, 255, 255, 180, 255);
@@ -80,6 +89,15 @@ class LoreSceneScreen extends Screen {
   @override
   Screen? onKey(int key) {
     final scene = johnGospelScenes[sceneIndex];
+    // Handle restart ('r' or 'R') at any time
+    if (key == 114 || key == 82) {
+      return LoreSceneScreen(sceneIndex, recitationStep: -1);
+    }
+    // Handle quit ('q' or 'Q') at any time after summary
+    if ((key == 113 || key == 81) &&
+        (recitationStep >= scene.recitationSteps.length)) {
+      return MainMenuScreen();
+    }
     if (recitationStep == -1) {
       // Move to first recitation step
       if (scene.recitationSteps.isNotEmpty) {
@@ -107,7 +125,17 @@ class LoreSceneScreen extends Screen {
     // After recitation, if summary is present, show summary first
     if (scene.summary.isNotEmpty &&
         recitationStep == scene.recitationSteps.length) {
-      // Next key press goes to choices
+      // If only one choice, only '1' advances
+      if (scene.choices.length == 1) {
+        if (key == 49) {
+          final next = scene.choices[0].nextSceneIndex;
+          if (next == -1) return null;
+          return LoreSceneScreen(next);
+        }
+        // Otherwise, stay on summary
+        return this;
+      }
+      // Otherwise, next key press goes to choices
       return LoreSceneScreen(
         sceneIndex,
         recitationStep: scene.recitationSteps.length + 1,

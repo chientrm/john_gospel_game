@@ -6,7 +6,7 @@ final List<LoreScene> johnGospelScenes = [
   LoreScene(
     title: 'Prologue: The Word Became Flesh',
     text:
-        'In the beginning was the Word, and the Word was with God, and the Word was God. ... The Word became flesh and made his dwelling among us. (John 1:1,14)',
+        'Welcome to the beginning of John’s Gospel. Here, you’ll discover the mystery of the Word—Jesus—who existed from the very start and came to live among us.',
     summary:
         'Summary: Jesus, the eternal Word, became flesh and lived among us, revealing God’s glory and grace.',
     choices: [LoreChoice(label: 'Continue', nextSceneIndex: 1)],
@@ -18,7 +18,7 @@ final List<LoreScene> johnGospelScenes = [
   LoreScene(
     title: 'The Testimony of John the Baptist',
     text:
-        'John the Baptist saw Jesus coming toward him and said, “Look, the Lamb of God, who takes away the sin of the world!” (John 1:29)',
+        'John the Baptist’s mission was to prepare the way for someone greater. In this scene, witness how he points everyone to Jesus.',
     summary:
         'Summary: John the Baptist identifies Jesus as the Lamb of God who takes away the sin of the world.',
     choices: [LoreChoice(label: 'Continue', nextSceneIndex: 2)],
@@ -30,7 +30,7 @@ final List<LoreScene> johnGospelScenes = [
   LoreScene(
     title: 'The First Disciples',
     text:
-        'Jesus said, “Come, and you will see.” So they went and saw where he was staying, and they spent that day with him. (John 1:39)',
+        'Meet the first people who chose to follow Jesus. Their journey begins with curiosity and a simple invitation.',
     summary:
         'Summary: The first disciples follow Jesus and begin their journey of faith.',
     choices: [LoreChoice(label: 'Continue', nextSceneIndex: 3)],
@@ -42,7 +42,7 @@ final List<LoreScene> johnGospelScenes = [
   LoreScene(
     title: 'Sign 1: Water into Wine',
     text:
-        'Jesus turned water into wine at Cana, revealing his glory. (John 2:1–11)',
+        'At a wedding in Cana, a problem arises—and Jesus’ first miracle reveals his glory in an unexpected way.',
     summary:
         'Summary: Jesus performs his first miracle, turning water into wine, revealing his glory.',
     choices: [LoreChoice(label: 'Continue', nextSceneIndex: 4)],
@@ -53,7 +53,8 @@ final List<LoreScene> johnGospelScenes = [
   ),
   LoreScene(
     title: 'Sign 2: Healing the Official’s Son',
-    text: 'Jesus healed the royal official’s son at a distance. (John 4:46–54)',
+    text:
+        'A desperate father seeks Jesus for help. See how faith and Jesus’ word bring healing—even from a distance.',
     summary:
         'Summary: Jesus heals a royal official’s son by his word, demonstrating his authority and power.',
     choices: [LoreChoice(label: 'Continue', nextSceneIndex: 5)],
@@ -65,7 +66,7 @@ final List<LoreScene> johnGospelScenes = [
   LoreScene(
     title: 'Sign 3: Healing at Bethesda',
     text:
-        'Jesus healed a man who had been an invalid for 38 years. (John 5:1–15)',
+        'By the pool of Bethesda, a man waits for healing. Jesus approaches and changes his life forever.',
     summary:
         'Summary: Jesus heals a man at Bethesda, showing his compassion and authority over the Sabbath.',
     choices: [LoreChoice(label: 'Continue', nextSceneIndex: 6)],
@@ -77,7 +78,7 @@ final List<LoreScene> johnGospelScenes = [
   LoreScene(
     title: 'Sign 4: Feeding the 5,000',
     text:
-        'Jesus fed five thousand people with five loaves and two fish. (John 6:5–14)',
+        'A huge crowd is hungry, but resources are few. Watch as Jesus provides more than enough for everyone.',
     summary:
         'Summary: Jesus feeds five thousand, demonstrating his power to provide and his compassion for the crowd.',
     choices: [LoreChoice(label: 'Continue', nextSceneIndex: 7)],
@@ -89,7 +90,7 @@ final List<LoreScene> johnGospelScenes = [
   LoreScene(
     title: 'Sign 5: Walking on Water',
     text:
-        'Jesus walked on the Sea of Galilee to reach his disciples. (John 6:16–21)',
+        'The disciples are caught in a storm on the lake. Jesus comes to them in a way that defies nature itself.',
     summary:
         'Summary: Jesus walks on water, revealing his divine authority over nature and calming his disciples’ fears.',
     choices: [LoreChoice(label: 'Continue', nextSceneIndex: 8)],
@@ -100,7 +101,8 @@ final List<LoreScene> johnGospelScenes = [
   ),
   LoreScene(
     title: 'Sign 6: Healing the Man Born Blind',
-    text: 'Jesus healed a man who had been blind from birth. (John 9:1–7)',
+    text:
+        'A man born blind encounters Jesus. This meeting will change his life and reveal who Jesus truly is.',
     summary:
         'Summary: Jesus heals a man born blind, showing that he is the light of the world.',
     choices: [LoreChoice(label: 'Continue', nextSceneIndex: 9)],
@@ -111,7 +113,8 @@ final List<LoreScene> johnGospelScenes = [
   ),
   LoreScene(
     title: 'Sign 7: Raising Lazarus',
-    text: 'Jesus raised Lazarus from the dead. (John 11:1–44)',
+    text:
+        'Lazarus has died, and his family mourns. Jesus arrives and demonstrates his power over death itself.',
     summary:
         'Summary: Jesus raises Lazarus from the dead, revealing his power over life and death.',
     choices: [LoreChoice(label: 'Continue', nextSceneIndex: 10)],
@@ -124,7 +127,7 @@ final List<LoreScene> johnGospelScenes = [
   LoreScene(
     title: 'The Last Supper',
     text:
-        'Jesus washed the disciples’ feet and gave a new commandment: Love one another. (John 13)',
+        'On the night before his death, Jesus gathers with his disciples for a final meal and a lesson in humility.',
     summary:
         'Summary: At the Last Supper, Jesus demonstrates servant leadership and commands his disciples to love one another.',
     choices: [LoreChoice(label: 'Continue', nextSceneIndex: 11)],
@@ -136,7 +139,7 @@ final List<LoreScene> johnGospelScenes = [
   LoreScene(
     title: 'Farewell Discourses',
     text:
-        'Jesus promised the Holy Spirit and prayed for his followers. (John 14–17)',
+        'Jesus prepares his disciples for what is to come, offering comfort, hope, and a promise of the Holy Spirit.',
     summary:
         'Summary: Jesus comforts his disciples, promises the Holy Spirit, and prays for all believers.',
     choices: [LoreChoice(label: 'Continue', nextSceneIndex: 12)],
@@ -147,7 +150,8 @@ final List<LoreScene> johnGospelScenes = [
   ),
   LoreScene(
     title: 'The Passion',
-    text: 'Jesus was arrested, tried, crucified, and buried. (John 18–19)',
+    text:
+        'Jesus faces betrayal, suffering, and death, fulfilling his mission to save the world.',
     summary:
         'Summary: Jesus willingly suffers, is crucified, and is buried to fulfill God’s plan of salvation.',
     choices: [LoreChoice(label: 'Continue', nextSceneIndex: 13)],
@@ -159,7 +163,7 @@ final List<LoreScene> johnGospelScenes = [
   LoreScene(
     title: 'The Resurrection',
     text:
-        'Jesus rose from the dead and appeared to Mary Magdalene and the disciples. (John 20)',
+        'The tomb is empty! Jesus is alive, and his followers encounter the risen Lord.',
     summary:
         'Summary: Jesus rises from the dead, appearing to Mary Magdalene and his disciples, bringing hope and new life.',
     choices: [LoreChoice(label: 'Continue', nextSceneIndex: 14)],
@@ -172,7 +176,7 @@ final List<LoreScene> johnGospelScenes = [
   LoreScene(
     title: 'Epilogue: By the Sea',
     text:
-        'Jesus appeared to his disciples by the Sea of Tiberias and restored Peter. (John 21)',
+        'After his resurrection, Jesus appears to his disciples by the sea and restores Peter’s calling.',
     summary:
         'Summary: Jesus restores Peter and calls his disciples to follow him and care for his people.',
     choices: [LoreChoice(label: 'Finish', nextSceneIndex: -1)],
