@@ -2,11 +2,11 @@ import 'dart:ffi' as ffi;
 import 'dart:io';
 
 // FFI type definitions for the C functions
-typedef c_create_window_func =
+typedef CCreateWindowFunc =
     ffi.Uint8 Function(ffi.Int32, ffi.Int32, ffi.Pointer<ffi.Int8>);
 typedef DartCreateWindow = int Function(int, int, ffi.Pointer<ffi.Int8>);
 
-typedef c_draw_rect_func =
+typedef CDrawRectFunc =
     ffi.Void Function(
       ffi.Int32,
       ffi.Int32,
@@ -19,10 +19,10 @@ typedef c_draw_rect_func =
     );
 typedef DartDrawRect = void Function(int, int, int, int, int, int, int, int);
 
-typedef c_poll_window_func = ffi.Uint8 Function();
+typedef CPollWindowFunc = ffi.Uint8 Function();
 typedef DartPollWindow = int Function();
 
-typedef c_destroy_window_func = ffi.Void Function();
+typedef CDestroyWindowFunc = ffi.Void Function();
 typedef DartDestroyWindow = void Function();
 
 final dylib = ffi.DynamicLibrary.open(
@@ -35,17 +35,15 @@ final dylib = ffi.DynamicLibrary.open(
 
 final DartCreateWindow createWindow =
     dylib
-        .lookup<ffi.NativeFunction<c_create_window_func>>('create_window')
+        .lookup<ffi.NativeFunction<CCreateWindowFunc>>('create_window')
         .asFunction();
 final DartDrawRect drawRect =
-    dylib
-        .lookup<ffi.NativeFunction<c_draw_rect_func>>('draw_rect')
-        .asFunction();
+    dylib.lookup<ffi.NativeFunction<CDrawRectFunc>>('draw_rect').asFunction();
 final DartPollWindow pollWindow =
     dylib
-        .lookup<ffi.NativeFunction<c_poll_window_func>>('poll_window')
+        .lookup<ffi.NativeFunction<CPollWindowFunc>>('poll_window')
         .asFunction();
 final DartDestroyWindow destroyWindow =
     dylib
-        .lookup<ffi.NativeFunction<c_destroy_window_func>>('destroy_window')
+        .lookup<ffi.NativeFunction<CDestroyWindowFunc>>('destroy_window')
         .asFunction();
