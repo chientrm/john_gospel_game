@@ -23,12 +23,13 @@ void main() {
     if (key != 0) {
       clearLastKeyPressed();
       final next = currentScreen.onKey(key);
-      if (next != null) {
+      if (next != null && next != currentScreen) {
         currentScreen = next;
         currentScreen.render(); // Only render on screen change
-      } else {
+      } else if (next == null) {
         running = false;
       }
+      // If next == currentScreen, do not redraw (prevents blink)
     }
     sleep(Duration(milliseconds: 16));
   }

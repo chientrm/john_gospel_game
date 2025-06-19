@@ -14,28 +14,29 @@ void drawWrappedText(
   int b,
   int a,
 ) {
-  // Simple word-wrap: split by space, build lines until width exceeded (approximate by char count)
-  // You may want to improve this with actual font metrics if available
+  // Improved word-wrap: handle newlines and wrap by word
   const avgCharWidth = 12; // Approximate width per character in pixels
-  final words = text.split(' ');
-  String line = '';
-  int curY = y;
-  for (final word in words) {
-    final testLine = line.isEmpty ? word : '$line $word';
-    if (testLine.length * avgCharWidth > maxWidth) {
-      final ptr = line.toNativeUtf8();
-      drawText(ptr.cast<ffi.Int8>(), x, curY, r, g, b, a);
-      calloc.free(ptr);
-      curY += lineHeight;
-      line = word;
-    } else {
-      line = testLine;
+  final lines = <String>[];
+  for (final paragraph in text.split('\n')) {
+    final words = paragraph.split(' ');
+    String line = '';
+    for (final word in words) {
+      final testLine = line.isEmpty ? word : '$line $word';
+      if (testLine.length * avgCharWidth > maxWidth) {
+        lines.add(line);
+        line = word;
+      } else {
+        line = testLine;
+      }
     }
+    if (line.isNotEmpty) lines.add(line);
   }
-  if (line.isNotEmpty) {
+  int curY = y;
+  for (final line in lines) {
     final ptr = line.toNativeUtf8();
     drawText(ptr.cast<ffi.Int8>(), x, curY, r, g, b, a);
     calloc.free(ptr);
+    curY += lineHeight;
   }
 }
 
