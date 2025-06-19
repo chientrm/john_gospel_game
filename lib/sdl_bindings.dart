@@ -67,6 +67,9 @@ typedef CDrawLineFunc =
     );
 typedef DartDrawLine = void Function(int, int, int, int, int, int, int, int);
 
+typedef CMeasureTextWidthFunc = ffi.Int32 Function(ffi.Pointer<ffi.Int8>);
+typedef DartMeasureTextWidth = int Function(ffi.Pointer<ffi.Int8>);
+
 final dylib = ffi.DynamicLibrary.open(
   Platform.isLinux
       ? (File('./libsdl_utils.so').existsSync()
@@ -119,6 +122,10 @@ final DartPresentRenderer presentRenderer =
         .asFunction();
 final DartDrawLine drawLine =
     dylib.lookup<ffi.NativeFunction<CDrawLineFunc>>('draw_line').asFunction();
+final DartMeasureTextWidth measureTextWidth =
+    dylib
+        .lookup<ffi.NativeFunction<CMeasureTextWidthFunc>>('measure_text_width')
+        .asFunction();
 
 // Draw a filled rectangle with optional alpha (for overlays, boxes, etc.)
 void drawBox(int x, int y, int w, int h, int r, int g, int b, int a) {
@@ -139,11 +146,9 @@ void drawTextCentered(
   int colorB,
   int colorA,
 ) {
-  // Approximate center: window width is 800, estimate text width
-  const avgCharWidth = 16; // Slightly larger for title
-  int textWidth = text.length * avgCharWidth;
-  int x = (800 - textWidth) ~/ 2;
   final ptr = text.toNativeUtf8();
+  int textWidth = measureTextWidth(ptr.cast<ffi.Int8>());
+  int x = (800 - textWidth) ~/ 2;
   drawText(ptr.cast<ffi.Int8>(), x, y, colorR, colorG, colorB, colorA);
   calloc.free(ptr);
 }

@@ -2,6 +2,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <stdbool.h>
+#include <string.h>
 
 static SDL_Window *window = NULL;
 static SDL_Renderer *renderer = NULL;
@@ -56,6 +57,16 @@ void draw_text(const char *text, int x, int y, Uint8 r, Uint8 g, Uint8 b, Uint8 
     SDL_RenderCopy(renderer, texture, NULL, &dst);
     SDL_FreeSurface(surface);
     SDL_DestroyTexture(texture);
+}
+
+// Measure the pixel width of a UTF-8 string using the current font
+int measure_text_width(const char *text)
+{
+    if (!font || !text)
+        return 0;
+    int w = 0, h = 0;
+    TTF_SizeUTF8(font, text, &w, &h);
+    return w;
 }
 
 // Poll events, check if window should close, and capture key presses
