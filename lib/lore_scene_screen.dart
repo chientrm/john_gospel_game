@@ -1,10 +1,10 @@
-import 'package:john_gospel_game/sdl_bindings.dart';
-import 'package:john_gospel_game/lore_data.dart';
 import 'dart:ffi' as ffi;
+
 import 'package:ffi/ffi.dart';
 import 'package:john_gospel_game/john_gospel_data.dart';
 import 'package:john_gospel_game/lore_scene.dart' show drawWrappedText;
 import 'package:john_gospel_game/screen.dart';
+import 'package:john_gospel_game/sdl_bindings.dart';
 
 class LoreSceneScreen extends Screen {
   final int sceneIndex;
@@ -16,8 +16,8 @@ class LoreSceneScreen extends Screen {
     if (sceneIndex < 0 || sceneIndex >= johnGospelScenes.length) return;
     final scene = johnGospelScenes[sceneIndex];
 
-    // Clear background
-    drawRect(0, 0, 800, 600, 32, 32, 48, 255);
+    // Clear background using SDL_RenderClear
+    clearScreen(32, 32, 48, 255);
 
     // Draw scene title
     final titlePtr = scene.title.toNativeUtf8();

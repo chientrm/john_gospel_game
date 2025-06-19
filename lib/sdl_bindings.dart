@@ -44,6 +44,12 @@ typedef DartGetLastKeyPressed = int Function();
 typedef CClearLastKeyPressedFunc = ffi.Void Function();
 typedef DartClearLastKeyPressed = void Function();
 
+// Add clear_screen binding
+
+typedef CClearScreenFunc =
+    ffi.Void Function(ffi.Uint8, ffi.Uint8, ffi.Uint8, ffi.Uint8);
+typedef DartClearScreen = void Function(int, int, int, int);
+
 final dylib = ffi.DynamicLibrary.open(
   Platform.isLinux
       ? (File('./libsdl_utils.so').existsSync()
@@ -85,4 +91,8 @@ final DartClearLastKeyPressed clearLastKeyPressed =
         .lookup<ffi.NativeFunction<CClearLastKeyPressedFunc>>(
           "clear_last_key_pressed",
         )
+        .asFunction();
+final DartClearScreen clearScreen =
+    dylib
+        .lookup<ffi.NativeFunction<CClearScreenFunc>>('clear_screen')
         .asFunction();

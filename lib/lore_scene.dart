@@ -14,8 +14,8 @@ void drawWrappedText(
   int b,
   int a,
 ) {
-  // Improved word-wrap: handle newlines and wrap by word
-  const avgCharWidth = 12; // Approximate width per character in pixels
+  // Improved word-wrap: handle newlines, wrap by word, split long words
+  const avgCharWidth = 10; // DejaVuSans is a bit narrower
   final lines = <String>[];
   for (final paragraph in text.split('\n')) {
     final words = paragraph.split(' ');
@@ -23,8 +23,21 @@ void drawWrappedText(
     for (final word in words) {
       final testLine = line.isEmpty ? word : '$line $word';
       if (testLine.length * avgCharWidth > maxWidth) {
-        lines.add(line);
-        line = word;
+        if (line.isNotEmpty) {
+          lines.add(line);
+          line = '';
+        }
+        // If the word itself is too long, split it
+        int start = 0;
+        while (start < word.length) {
+          int charsThatFit = maxWidth ~/ avgCharWidth;
+          final part = word.substring(
+            start,
+            (start + charsThatFit).clamp(0, word.length),
+          );
+          lines.add(part);
+          start += charsThatFit;
+        }
       } else {
         line = testLine;
       }

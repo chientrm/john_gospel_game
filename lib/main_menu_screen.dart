@@ -7,7 +7,7 @@ import 'package:john_gospel_game/lore_scene_screen.dart';
 class MainMenuScreen extends Screen {
   @override
   void render() {
-    drawRect(0, 0, 800, 600, 24, 24, 48, 255);
+    clearScreen(24, 24, 48, 255);
     final gameTitle = 'Christian Lore Game'.toNativeUtf8();
     drawText(gameTitle.cast<ffi.Int8>(), 120, 100, 255, 255, 255, 255);
     calloc.free(gameTitle);

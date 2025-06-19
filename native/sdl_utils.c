@@ -86,6 +86,16 @@ void clear_last_key_pressed()
     last_key_pressed = 0;
 }
 
+// Clear the screen with a color using SDL_RenderClear
+void clear_screen(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+{
+    if (!renderer)
+        return;
+    SDL_SetRenderDrawColor(renderer, r, g, b, a);
+    SDL_RenderClear(renderer);
+    SDL_RenderPresent(renderer);
+}
+
 // Destroy window and cleanup
 void destroy_window()
 {
