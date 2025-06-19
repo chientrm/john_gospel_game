@@ -22,7 +22,8 @@ class LoreSceneScreen extends Screen {
           return LoreSceneScreen(next);
         }
       }
-      return null;
+      // If key is not a valid choice, stay on the same screen
+      return this;
     } else {
       // No choices, any key continues
       return null;
