@@ -1,8 +1,6 @@
-import 'dart:ffi' as ffi;
-import 'package:ffi/ffi.dart';
-import 'package:john_gospel_game/sdl_bindings.dart';
-import 'package:john_gospel_game/screen.dart';
 import 'package:john_gospel_game/lore_scene_screen.dart';
+import 'package:john_gospel_game/screen.dart';
+import 'package:john_gospel_game/sdl_bindings.dart';
 
 class MainMenuScreen extends Screen {
   @override
