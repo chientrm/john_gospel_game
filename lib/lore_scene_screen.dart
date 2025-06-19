@@ -46,9 +46,21 @@ class LoreSceneScreen extends Screen {
       String progress =
           'Step ${recitationStep + 1} of ${scene.recitationSteps.length}';
       drawTextCentered(progress, 320, 180, 220, 255, 255);
+      drawTextCentered(
+        '(Press any key for next step)',
+        370,
+        180,
+        220,
+        255,
+        255,
+      );
+    } else if (scene.summary.isNotEmpty) {
+      // After recitation, show summary if available
+      drawWrappedText(scene.summary, 80, 120, 640, 32, 180, 255, 180, 255);
+      drawTextCentered('(Press any key to continue)', 370, 180, 180, 255, 180);
     } else {
       // After recitation, show choices
-      drawWrappedText(scene.text, 80, 120, 640, 32, 220, 220, 255, 255);
+      drawTextCentered('Choose an option:', 320, 255, 255, 180, 255);
       int y = 350;
       for (var i = 0; i < scene.choices.length; i++) {
         drawTextCentered(
@@ -73,7 +85,7 @@ class LoreSceneScreen extends Screen {
       if (scene.recitationSteps.isNotEmpty) {
         return LoreSceneScreen(sceneIndex, recitationStep: 0);
       } else {
-        // No recitation steps, go to choices
+        // No recitation steps, go to summary or choices
         return LoreSceneScreen(
           sceneIndex,
           recitationStep: scene.recitationSteps.length,
@@ -85,13 +97,23 @@ class LoreSceneScreen extends Screen {
       if (recitationStep + 1 < scene.recitationSteps.length) {
         return LoreSceneScreen(sceneIndex, recitationStep: recitationStep + 1);
       } else {
-        // Finished recitation, show choices
+        // Finished recitation, go to summary or choices
         return LoreSceneScreen(
           sceneIndex,
           recitationStep: scene.recitationSteps.length,
         );
       }
     }
+    // After recitation, if summary is present, show summary first
+    if (scene.summary.isNotEmpty &&
+        recitationStep == scene.recitationSteps.length) {
+      // Next key press goes to choices
+      return LoreSceneScreen(
+        sceneIndex,
+        recitationStep: scene.recitationSteps.length + 1,
+      );
+    }
+    // Only allow valid choice keys after summary/recitation
     if (scene.choices.isNotEmpty) {
       for (int i = 0; i < scene.choices.length; i++) {
         if (key == 49 + i) {
@@ -100,6 +122,7 @@ class LoreSceneScreen extends Screen {
           return LoreSceneScreen(next);
         }
       }
+      // Invalid key, stay on the same screen
       return this;
     } else {
       return null;

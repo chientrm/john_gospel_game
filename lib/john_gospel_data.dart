@@ -7,6 +7,8 @@ final List<LoreScene> johnGospelScenes = [
     title: 'Prologue: The Word Became Flesh',
     text:
         'In the beginning was the Word, and the Word was with God, and the Word was God. ... The Word became flesh and made his dwelling among us. (John 1:1,14)',
+    summary:
+        'Summary: Jesus, the eternal Word, became flesh and lived among us, revealing God’s glory and grace.',
     choices: [LoreChoice(label: 'Continue', nextSceneIndex: 1)],
     recitationSteps: [
       'In the beginning was the Word, and the Word was with God, and the Word was God. (John 1:1, NIV)',
