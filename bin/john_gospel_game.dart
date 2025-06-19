@@ -19,11 +19,9 @@ void main() {
   bool running = true;
   currentScreen.render(); // Initial render
 
-  int prevKey = 0;
   while (running && pollWindow() != 0) {
     int key = getLastKeyPressed();
-    if (key != 0 && prevKey == 0) {
-      // Only on new key press
+    if (key != 0) {
       clearLastKeyPressed();
       final next = currentScreen.onKey(key);
       if (next != null && next != currentScreen) {
@@ -34,7 +32,6 @@ void main() {
       }
       // If next == currentScreen, do not redraw (prevents blink)
     }
-    prevKey = key;
     sleep(Duration(milliseconds: 16));
   }
 
