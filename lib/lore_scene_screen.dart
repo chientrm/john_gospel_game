@@ -32,7 +32,7 @@ class LoreSceneScreen extends Screen {
       // Show intro text
       drawWrappedText(scene.text, 200, 170, 880, 36, 220, 220, 255, 255);
       drawTextCentered(
-        '(Press any key to begin recitation)',
+        "(Press any key to begin recitation, 'q' to quit)",
         440,
         220,
         255,
@@ -57,7 +57,7 @@ class LoreSceneScreen extends Screen {
           'Step ${recitationStep + 1} of ${scene.recitationSteps.length}';
       drawTextCentered(progress, 500, 220, 255, 255, 255, width: 1280);
       drawTextCentered(
-        '(Press any key for next step)',
+        "(Press any key for next step, 'q' to quit)",
         540,
         220,
         255,
@@ -112,9 +112,8 @@ class LoreSceneScreen extends Screen {
     if (key == 114 || key == 82) {
       return LoreSceneScreen(sceneIndex, recitationStep: -1);
     }
-    // Handle quit ('q' or 'Q') at any time after summary
-    if ((key == 113 || key == 81) &&
-        (recitationStep >= scene.recitationSteps.length)) {
+    // Handle quit ('q' or 'Q') at any time (from any step)
+    if (key == 113 || key == 81) {
       return MainMenuScreen();
     }
     if (recitationStep == -1) {

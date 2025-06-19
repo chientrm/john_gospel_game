@@ -15,7 +15,7 @@ class MainMenuScreen extends Screen {
     // Title (centered)
     drawTextCentered(
       'Christian Lore Game',
-      80,
+      60,
       255,
       255,
       255,
@@ -25,24 +25,15 @@ class MainMenuScreen extends Screen {
     // Subtitle (centered)
     drawTextCentered(
       'Discover, Learn, and Play!',
-      160,
+      120,
       180,
       200,
       255,
       255,
       width: 1280,
     );
-    // Prompt (centered, near top)
-    drawTextCentered(
-      'Select a lore scene with ↑/↓, Enter to start',
-      210,
-      200,
-      255,
-      200,
-      255,
-      width: 1280,
-    );
-    int y = 270;
+    int menuStartY = 180;
+    int y = menuStartY;
     for (int i = 0; i < johnGospelScenes.length; i++) {
       final color =
           i == selectedIndex ? [255, 255, 180, 255] : [180, 200, 255, 255];
@@ -55,14 +46,26 @@ class MainMenuScreen extends Screen {
         color[3],
         width: 1280,
       );
-      y += 36;
+      y += 28; // Tighter spacing for more items
     }
+    drawTextCentered(
+      "Press ↑/↓ to select, Enter to start, 'q' to quit",
+      690,
+      255,
+      180,
+      180,
+      255,
+      width: 1280,
+    );
     presentRenderer();
   }
 
   @override
   Screen? onKey(int key) {
-    // Up: 1073741906, Down: 1073741905, Enter: 13
+    // Up: 1073741906, Down: 1073741905, Enter: 13, Quit: 'q' or 'Q'
+    if (key == 113 || key == 81) {
+      return null; // Quit game
+    }
     if (key == 1073741906) {
       return MainMenuScreen(
         selectedIndex:
