@@ -1,4 +1,4 @@
-import 'package:john_gospel_game/lore_data.dart';
+import 'package:john_gospel_game/john_gospel_data.dart';
 import 'package:john_gospel_game/lore_scene.dart';
 import 'package:john_gospel_game/screen.dart';
 
@@ -8,12 +8,12 @@ class LoreSceneScreen extends Screen {
 
   @override
   void render() {
-    showLoreScene(sceneIndex);
+    showLoreScene(sceneIndex, scenes: johnGospelScenes);
   }
 
   @override
   Screen? onKey(int key) {
-    final scene = loreScenes[sceneIndex];
+    final scene = johnGospelScenes[sceneIndex];
     if (scene.choices.isNotEmpty) {
       for (int i = 0; i < scene.choices.length; i++) {
         if (key == 49 + i) {

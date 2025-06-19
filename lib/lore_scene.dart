@@ -3,9 +3,9 @@ import 'package:ffi/ffi.dart';
 import 'package:john_gospel_game/sdl_bindings.dart';
 import 'package:john_gospel_game/lore_data.dart';
 
-void showLoreScene(int sceneIndex) {
-  if (sceneIndex < 0 || sceneIndex >= loreScenes.length) return;
-  final scene = loreScenes[sceneIndex];
+void showLoreScene(int sceneIndex, {required List<LoreScene> scenes}) {
+  if (sceneIndex < 0 || sceneIndex >= scenes.length) return;
+  final scene = scenes[sceneIndex];
 
   // Clear background
   drawRect(0, 0, 800, 600, 32, 32, 48, 255);
