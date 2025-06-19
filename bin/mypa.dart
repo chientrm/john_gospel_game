@@ -1,12 +1,10 @@
 import 'dart:ffi' as ffi;
+import 'dart:io';
 
 import 'package:ffi/ffi.dart';
-import 'package:mypa/lore_data.dart';
-import 'package:mypa/lore_scene.dart';
-import 'package:mypa/main_screen.dart';
+import 'package:mypa/main_menu_screen.dart';
+import 'package:mypa/screen.dart';
 import 'package:mypa/sdl_bindings.dart';
-
-enum GameScreen { mainMenu, story, exploration, puzzle, lore, exit }
 
 void main() {
   final title = 'Christian Lore Game'.toNativeUtf8();
@@ -16,70 +14,23 @@ void main() {
   }
   print('Window created!');
 
-  GameScreen currentScreen = GameScreen.mainMenu;
-  int currentScene = 0;
+  Screen currentScreen = MainMenuScreen();
   bool running = true;
 
-  while (running) {
-    switch (currentScreen) {
-      case GameScreen.mainMenu:
-        showMainScreen();
-        // For now, auto-advance to story after main screen
-        currentScreen = GameScreen.story;
-        break;
-      case GameScreen.story:
-        int selected = -1;
-        showLoreScene(currentScene);
-        // Wait for valid key input or window close
-        bool waiting = true;
-        while (waiting && pollWindow() != 0) {
-          int key = getLastKeyPressed();
-          if (key != 0) {
-            clearLastKeyPressed();
-            // Check if key is a number key for choices
-            if (loreScenes[currentScene].choices.isNotEmpty) {
-              for (
-                int i = 0;
-                i < loreScenes[currentScene].choices.length;
-                i++
-              ) {
-                // SDL2 keycodes for 1,2,3... are 49,50,51...
-                if (key == 49 + i) {
-                  selected = i;
-                  waiting = false;
-                  break;
-                }
-              }
-            } else {
-              // If no choices, any key continues
-              waiting = false;
-            }
-          }
-        }
-        if (selected != -1) {
-          currentScene =
-              loreScenes[currentScene].choices[selected].nextSceneIndex;
-        } else {
-          currentScreen = GameScreen.lore;
-        }
-        break;
-      case GameScreen.lore:
-        // Placeholder: show lore/inventory screen
-        // For now, just exit
+  while (running && pollWindow() != 0) {
+    currentScreen.render();
+    int key = getLastKeyPressed();
+    if (key != 0) {
+      clearLastKeyPressed();
+      final next = currentScreen.onKey(key);
+      if (next != null) {
+        currentScreen = next;
+      } else {
         running = false;
-        break;
-      case GameScreen.exploration:
-        // Placeholder for exploration scene
-        running = false;
-        break;
-      case GameScreen.puzzle:
-        // Placeholder for puzzle/mini-game
-        running = false;
-        break;
-      case GameScreen.exit:
-        running = false;
-        break;
+      }
     }
+    // Add a small delay to avoid busy loop
+    sleep(Duration(milliseconds: 16));
   }
 
   destroyWindow();
