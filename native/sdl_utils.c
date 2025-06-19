@@ -6,6 +6,7 @@
 static SDL_Window *window = NULL;
 static SDL_Renderer *renderer = NULL;
 static TTF_Font *font = NULL;
+static SDL_Keycode last_key_pressed = 0;
 
 // Initialize SDL2, SDL_ttf, create window and renderer, and load font
 bool create_window(int width, int height, const char *title)
@@ -59,7 +60,7 @@ void draw_text(const char *text, int x, int y, Uint8 r, Uint8 g, Uint8 b, Uint8 
     SDL_RenderPresent(renderer);
 }
 
-// Poll events and check if window should close
+// Poll events, check if window should close, and capture key presses
 bool poll_window()
 {
     SDL_Event event;
@@ -67,8 +68,22 @@ bool poll_window()
     {
         if (event.type == SDL_QUIT)
             return false;
+        if (event.type == SDL_KEYDOWN)
+            last_key_pressed = event.key.keysym.sym;
     }
     return true;
+}
+
+// Get the last key pressed (returns 0 if none)
+int get_last_key_pressed()
+{
+    return last_key_pressed;
+}
+
+// Clear the last key pressed
+void clear_last_key_pressed()
+{
+    last_key_pressed = 0;
 }
 
 // Destroy window and cleanup

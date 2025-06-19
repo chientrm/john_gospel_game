@@ -38,6 +38,12 @@ typedef CDrawTextFunc =
 typedef DartDrawText =
     void Function(ffi.Pointer<ffi.Int8>, int, int, int, int, int, int);
 
+typedef CGetLastKeyPressedFunc = ffi.Int32 Function();
+typedef DartGetLastKeyPressed = int Function();
+
+typedef CClearLastKeyPressedFunc = ffi.Void Function();
+typedef DartClearLastKeyPressed = void Function();
+
 final dylib = ffi.DynamicLibrary.open(
   Platform.isLinux
       ? (File('./libsdl_utils.so').existsSync()
@@ -68,3 +74,15 @@ final DartDestroyWindow destroyWindow =
         .asFunction();
 final DartDrawText drawText =
     dylib.lookup<ffi.NativeFunction<CDrawTextFunc>>('draw_text').asFunction();
+final DartGetLastKeyPressed getLastKeyPressed =
+    dylib
+        .lookup<ffi.NativeFunction<CGetLastKeyPressedFunc>>(
+          "get_last_key_pressed",
+        )
+        .asFunction();
+final DartClearLastKeyPressed clearLastKeyPressed =
+    dylib
+        .lookup<ffi.NativeFunction<CClearLastKeyPressedFunc>>(
+          "clear_last_key_pressed",
+        )
+        .asFunction();
