@@ -35,7 +35,6 @@ void draw_rect(int x, int y, int w, int h, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
     SDL_SetRenderDrawColor(renderer, r, g, b, a);
     SDL_Rect rect = {x, y, w, h};
     SDL_RenderFillRect(renderer, &rect);
-    SDL_RenderPresent(renderer);
 }
 
 // Render text at (x, y) with RGBA color
@@ -57,7 +56,6 @@ void draw_text(const char *text, int x, int y, Uint8 r, Uint8 g, Uint8 b, Uint8 
     SDL_RenderCopy(renderer, texture, NULL, &dst);
     SDL_FreeSurface(surface);
     SDL_DestroyTexture(texture);
-    SDL_RenderPresent(renderer);
 }
 
 // Poll events, check if window should close, and capture key presses
@@ -93,7 +91,13 @@ void clear_screen(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
         return;
     SDL_SetRenderDrawColor(renderer, r, g, b, a);
     SDL_RenderClear(renderer);
-    SDL_RenderPresent(renderer);
+}
+
+// Present the renderer
+void present_renderer()
+{
+    if (renderer)
+        SDL_RenderPresent(renderer);
 }
 
 // Destroy window and cleanup

@@ -50,6 +50,9 @@ typedef CClearScreenFunc =
     ffi.Void Function(ffi.Uint8, ffi.Uint8, ffi.Uint8, ffi.Uint8);
 typedef DartClearScreen = void Function(int, int, int, int);
 
+typedef CPresentRendererFunc = ffi.Void Function();
+typedef DartPresentRenderer = void Function();
+
 final dylib = ffi.DynamicLibrary.open(
   Platform.isLinux
       ? (File('./libsdl_utils.so').existsSync()
@@ -95,4 +98,8 @@ final DartClearLastKeyPressed clearLastKeyPressed =
 final DartClearScreen clearScreen =
     dylib
         .lookup<ffi.NativeFunction<CClearScreenFunc>>('clear_screen')
+        .asFunction();
+final DartPresentRenderer presentRenderer =
+    dylib
+        .lookup<ffi.NativeFunction<CPresentRendererFunc>>('present_renderer')
         .asFunction();

@@ -36,6 +36,7 @@ class LoreSceneScreen extends Screen {
       calloc.free(choicePtr);
       y += 50;
     }
+    presentRenderer();
   }
 
   @override

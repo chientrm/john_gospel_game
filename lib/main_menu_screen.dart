@@ -17,6 +17,7 @@ class MainMenuScreen extends Screen {
     final prompt = 'Press any key to start'.toNativeUtf8();
     drawText(prompt.cast<ffi.Int8>(), 250, 500, 255, 255, 180, 255);
     calloc.free(prompt);
+    presentRenderer();
   }
 
   @override
