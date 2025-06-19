@@ -62,7 +62,7 @@ class LoreSceneScreen extends Screen {
       if (scene.choices.isNotEmpty) {
         choiceHint =
             "Press 'r' to restart, 'q' to quit, or "
-            "${scene.choices.length == 1 ? "'1' to continue" : "a number to choose"}";
+            "${scene.choices.length == 1 ? "Enter to continue" : "a number to choose"}";
       } else {
         choiceHint = "Press 'r' to restart or 'q' to quit";
       }
@@ -125,9 +125,10 @@ class LoreSceneScreen extends Screen {
     // After recitation, if summary is present, show summary first
     if (scene.summary.isNotEmpty &&
         recitationStep == scene.recitationSteps.length) {
-      // If only one choice, only '1' advances
+      // If only one choice, only Enter advances
       if (scene.choices.length == 1) {
-        if (key == 49) {
+        if (key == 13) {
+          // Enter key
           final next = scene.choices[0].nextSceneIndex;
           if (next == -1) return null;
           return LoreSceneScreen(next);
