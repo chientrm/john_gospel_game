@@ -1,5 +1,5 @@
 #!/bin/bash
-# Build script for Dart+SDL2 FFI project
+# Build script for Dart+SDL2 FFI project with assets support
 set -e
 
 # 1. Build native shared library
@@ -13,5 +13,9 @@ dart compile exe bin/mypa.dart -o build/mypa
 mkdir -p dist
 cp build/mypa dist/
 cp native/libsdl_utils.so dist/
+
+# 4. Copy assets
+mkdir -p dist/assets
+cp -r assets/* dist/assets/
 
 echo "Build complete. Distribution is in the dist/ folder."

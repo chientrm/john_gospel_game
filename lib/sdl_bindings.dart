@@ -25,6 +25,19 @@ typedef DartPollWindow = int Function();
 typedef CDestroyWindowFunc = ffi.Void Function();
 typedef DartDestroyWindow = void Function();
 
+typedef CDrawTextFunc =
+    ffi.Void Function(
+      ffi.Pointer<ffi.Int8>,
+      ffi.Int32,
+      ffi.Int32,
+      ffi.Uint8,
+      ffi.Uint8,
+      ffi.Uint8,
+      ffi.Uint8,
+    );
+typedef DartDrawText =
+    void Function(ffi.Pointer<ffi.Int8>, int, int, int, int, int, int);
+
 final dylib = ffi.DynamicLibrary.open(
   Platform.isLinux
       ? (File('./libsdl_utils.so').existsSync()
@@ -53,3 +66,5 @@ final DartDestroyWindow destroyWindow =
     dylib
         .lookup<ffi.NativeFunction<CDestroyWindowFunc>>('destroy_window')
         .asFunction();
+final DartDrawText drawText =
+    dylib.lookup<ffi.NativeFunction<CDrawTextFunc>>('draw_text').asFunction();

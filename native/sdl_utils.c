@@ -1,20 +1,27 @@
 // sdl_utils.c - SDL2 utility library for Dart FFI
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 #include <stdbool.h>
 
 static SDL_Window *window = NULL;
 static SDL_Renderer *renderer = NULL;
+static TTF_Font *font = NULL;
 
-// Create a window and renderer
+// Initialize SDL2, SDL_ttf, create window and renderer, and load font
 bool create_window(int width, int height, const char *title)
 {
     if (SDL_Init(SDL_INIT_VIDEO) != 0)
+        return false;
+    if (TTF_Init() != 0)
         return false;
     window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, 0);
     if (!window)
         return false;
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     if (!renderer)
+        return false;
+    font = TTF_OpenFont("assets/DejaVuSans.ttf", 24); // Font file must be in assets/
+    if (!font)
         return false;
     return true;
 }
@@ -27,6 +34,28 @@ void draw_rect(int x, int y, int w, int h, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
     SDL_SetRenderDrawColor(renderer, r, g, b, a);
     SDL_Rect rect = {x, y, w, h};
     SDL_RenderFillRect(renderer, &rect);
+    SDL_RenderPresent(renderer);
+}
+
+// Render text at (x, y) with RGBA color
+void draw_text(const char *text, int x, int y, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+{
+    if (!renderer || !font || !text)
+        return;
+    SDL_Color color = {r, g, b, a};
+    SDL_Surface *surface = TTF_RenderUTF8_Blended(font, text, color);
+    if (!surface)
+        return;
+    SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
+    if (!texture)
+    {
+        SDL_FreeSurface(surface);
+        return;
+    }
+    SDL_Rect dst = {x, y, surface->w, surface->h};
+    SDL_RenderCopy(renderer, texture, NULL, &dst);
+    SDL_FreeSurface(surface);
+    SDL_DestroyTexture(texture);
     SDL_RenderPresent(renderer);
 }
 
@@ -45,9 +74,12 @@ bool poll_window()
 // Destroy window and cleanup
 void destroy_window()
 {
+    if (font)
+        TTF_CloseFont(font);
     if (renderer)
         SDL_DestroyRenderer(renderer);
     if (window)
         SDL_DestroyWindow(window);
+    TTF_Quit();
     SDL_Quit();
 }
