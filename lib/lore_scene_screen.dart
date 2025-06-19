@@ -1,10 +1,7 @@
-import 'dart:ffi' as ffi;
-
-import 'package:ffi/ffi.dart';
 import 'package:john_gospel_game/john_gospel_data.dart';
-import 'package:john_gospel_game/lore_scene.dart' show drawWrappedText;
 import 'package:john_gospel_game/screen.dart';
 import 'package:john_gospel_game/sdl_bindings.dart';
+import 'package:john_gospel_game/text_rendering.dart' show drawWrappedText;
 
 class LoreSceneScreen extends Screen {
   final int sceneIndex;
