@@ -8,6 +8,10 @@ final List<LoreScene> johnGospelScenes = [
     text:
         'In the beginning was the Word, and the Word was with God, and the Word was God. ... The Word became flesh and made his dwelling among us. (John 1:1,14)',
     choices: [LoreChoice(label: 'Continue', nextSceneIndex: 1)],
+    recitationSteps: [
+      'In the beginning was the Word, and the Word was with God, and the Word was God. (John 1:1, NIV)',
+      'The Word became flesh and made his dwelling among us. We have seen his glory, the glory of the one and only Son, who came from the Father, full of grace and truth. (John 1:14, NIV)',
+    ],
   ),
   // Book of Signs
   LoreScene(

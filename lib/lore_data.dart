@@ -2,8 +2,14 @@ class LoreScene {
   final String title;
   final String text;
   final List<LoreChoice> choices;
+  final List<String> recitationSteps;
 
-  LoreScene({required this.title, required this.text, this.choices = const []});
+  LoreScene({
+    required this.title,
+    required this.text,
+    this.choices = const [],
+    this.recitationSteps = const [],
+  });
 }
 
 class LoreChoice {
