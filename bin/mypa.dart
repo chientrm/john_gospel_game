@@ -16,20 +16,20 @@ void main() {
 
   Screen currentScreen = MainMenuScreen();
   bool running = true;
+  currentScreen.render(); // Initial render
 
   while (running && pollWindow() != 0) {
-    currentScreen.render();
     int key = getLastKeyPressed();
     if (key != 0) {
       clearLastKeyPressed();
       final next = currentScreen.onKey(key);
       if (next != null) {
         currentScreen = next;
+        currentScreen.render(); // Only render on screen change
       } else {
         running = false;
       }
     }
-    // Add a small delay to avoid busy loop
     sleep(Duration(milliseconds: 16));
   }
 
