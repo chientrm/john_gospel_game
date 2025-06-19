@@ -27,10 +27,16 @@ typedef DartDestroyWindow = void Function();
 
 final dylib = ffi.DynamicLibrary.open(
   Platform.isLinux
-      ? 'native/libsdl_utils.so'
+      ? (File('./libsdl_utils.so').existsSync()
+          ? './libsdl_utils.so'
+          : 'native/libsdl_utils.so')
       : Platform.isMacOS
-      ? 'native/libsdl_utils.dylib'
-      : 'native/sdl_utils.dll',
+      ? (File('./libsdl_utils.dylib').existsSync()
+          ? './libsdl_utils.dylib'
+          : 'native/libsdl_utils.dylib')
+      : (File('./sdl_utils.dll').existsSync()
+          ? './sdl_utils.dll'
+          : 'native/sdl_utils.dll'),
 );
 
 final DartCreateWindow createWindow =
