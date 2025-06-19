@@ -18,22 +18,23 @@ class LoreSceneScreen extends Screen {
 
     // Clear background using SDL_RenderClear
     clearScreen(32, 32, 48, 255);
-
-    // Draw scene title
-    final titlePtr = scene.title.toNativeUtf8();
-    drawText(titlePtr.cast<ffi.Int8>(), 60, 80, 255, 255, 255, 255);
-    calloc.free(titlePtr);
-
-    // Draw scene text with word-wrapping
-    drawWrappedText(scene.text, 60, 180, 680, 32, 220, 220, 255, 255);
-
-    // Draw choices
+    // Title (centered, with underline)
+    drawTextCentered(scene.title, 40, 255, 255, 255, 255);
+    drawHLine(100, 700, 80, 255, 255, 255, 255);
+    // Lore text box
+    drawBox(60, 100, 680, 220, 40, 40, 60, 180);
+    drawWrappedText(scene.text, 80, 120, 640, 32, 220, 220, 255, 255);
+    // Choices (centered)
     int y = 350;
     for (var i = 0; i < scene.choices.length; i++) {
-      final choice = scene.choices[i];
-      final choicePtr = ("[${i + 1}] ${choice.label}").toNativeUtf8();
-      drawText(choicePtr.cast<ffi.Int8>(), 80, y, 255, 255, 180, 255);
-      calloc.free(choicePtr);
+      drawTextCentered(
+        "[${i + 1}] ${scene.choices[i].label}",
+        y,
+        255,
+        255,
+        180,
+        255,
+      );
       y += 50;
     }
     presentRenderer();

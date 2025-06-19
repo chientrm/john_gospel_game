@@ -1,4 +1,5 @@
 import 'dart:ffi' as ffi;
+import 'package:ffi/ffi.dart';
 import 'dart:io';
 
 // FFI type definitions for the C functions
@@ -53,6 +54,19 @@ typedef DartClearScreen = void Function(int, int, int, int);
 typedef CPresentRendererFunc = ffi.Void Function();
 typedef DartPresentRenderer = void Function();
 
+typedef CDrawLineFunc =
+    ffi.Void Function(
+      ffi.Int32,
+      ffi.Int32,
+      ffi.Int32,
+      ffi.Int32,
+      ffi.Uint8,
+      ffi.Uint8,
+      ffi.Uint8,
+      ffi.Uint8,
+    );
+typedef DartDrawLine = void Function(int, int, int, int, int, int, int, int);
+
 final dylib = ffi.DynamicLibrary.open(
   Platform.isLinux
       ? (File('./libsdl_utils.so').existsSync()
@@ -103,3 +117,33 @@ final DartPresentRenderer presentRenderer =
     dylib
         .lookup<ffi.NativeFunction<CPresentRendererFunc>>('present_renderer')
         .asFunction();
+final DartDrawLine drawLine =
+    dylib.lookup<ffi.NativeFunction<CDrawLineFunc>>('draw_line').asFunction();
+
+// Draw a filled rectangle with optional alpha (for overlays, boxes, etc.)
+void drawBox(int x, int y, int w, int h, int r, int g, int b, int a) {
+  drawRect(x, y, w, h, r, g, b, a);
+}
+
+// Draw a horizontal line (for underlines, separators)
+void drawHLine(int x1, int x2, int y, int r, int g, int b, int a) {
+  drawLine(x1, y, x2, y, r, g, b, a);
+}
+
+// Draw text centered horizontally
+void drawTextCentered(
+  String text,
+  int y,
+  int colorR,
+  int colorG,
+  int colorB,
+  int colorA,
+) {
+  // Approximate center: window width is 800, estimate text width
+  const avgCharWidth = 16; // Slightly larger for title
+  int textWidth = text.length * avgCharWidth;
+  int x = (800 - textWidth) ~/ 2;
+  final ptr = text.toNativeUtf8();
+  drawText(ptr.cast<ffi.Int8>(), x, y, colorR, colorG, colorB, colorA);
+  calloc.free(ptr);
+}

@@ -112,3 +112,12 @@ void destroy_window()
     TTF_Quit();
     SDL_Quit();
 }
+
+// Draw a line from (x1, y1) to (x2, y2) with RGBA color
+void draw_line(int x1, int y1, int x2, int y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+{
+    if (!renderer)
+        return;
+    SDL_SetRenderDrawColor(renderer, r, g, b, a);
+    SDL_RenderDrawLine(renderer, x1, y1, x2, y2);
+}
