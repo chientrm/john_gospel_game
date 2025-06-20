@@ -50,13 +50,13 @@ jobs:
       - name: Zip dist folder
         run: |
           cd dist
-          zip -r ../dist-${{ github.ref_name }}-ubuntu-latest.zip .
+          zip -r ../john_gospel_game-${{ github.ref_name }}-ubuntu.zip .
         shell: bash
 
       - name: Upload to existing release
         uses: svenstaro/upload-release-action@v2
         with:
-          file: dist-${{ github.ref_name }}-ubuntu-latest.zip
-          asset_name: dist-${{ github.ref_name }}-ubuntu-latest.zip
+          file: john_gospel_game-${{ github.ref_name }}-ubuntu.zip
+          asset_name: john_gospel_game-${{ github.ref_name }}-ubuntu.zip
           tag: ${{ github.ref_name }}
           overwrite: true
