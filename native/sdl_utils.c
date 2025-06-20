@@ -1,6 +1,6 @@
 // sdl_utils.c - SDL2 utility library for Dart FFI
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_ttf.h>
+#include <SDL.h>
+#include <SDL_ttf.h>
 #include <stdbool.h>
 #include <string.h>
 
