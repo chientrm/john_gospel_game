@@ -1,0 +1,63 @@
+name: Build and Upload Distributable (Windows)
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up CMake
+        uses: jwlawson/actions-setup-cmake@v2
+
+      - name: Set up Dart
+        uses: dart-lang/setup-dart@v1
+
+      - name: Download and extract SDL2/SDL2_ttf
+        shell: pwsh
+        run: |
+          Invoke-WebRequest -Uri https://github.com/libsdl-org/SDL/releases/download/release-2.30.2/SDL2-devel-2.30.2-VC.zip -OutFile SDL2.zip
+          Invoke-WebRequest -Uri https://github.com/libsdl-org/SDL_ttf/releases/download/release-2.22.0/SDL2_ttf-devel-2.22.0-VC.zip -OutFile SDL2_ttf.zip
+          Expand-Archive SDL2.zip -DestinationPath SDL2
+          Expand-Archive SDL2_ttf.zip -DestinationPath SDL2_ttf
+
+      - name: Build native library
+        env:
+          SDL2_DIR: ${{ github.workspace }}/SDL2/SDL2-2.30.2
+          SDL2_TTF_DIR: ${{ github.workspace }}/SDL2_ttf/SDL2_ttf-2.22.0
+        run: |
+          cmake -S native -B native/build -DSDL2_INCLUDE_DIR="${SDL2_DIR}/include" -DSDL2_LIBRARY="${SDL2_DIR}/lib/x64/SDL2.lib" -DSDL2_TTF_INCLUDE_DIR="${SDL2_TTF_DIR}/include" -DSDL2_TTF_LIBRARY="${SDL2_TTF_DIR}/lib/x64/SDL2_ttf.lib"
+          cmake --build native/build
+
+      - name: Build Dart executable
+        run: |
+          dart pub get
+          mkdir -p build
+          dart compile exe bin/john_gospel_game.dart -o build/john_gospel_game.exe
+
+      - name: Prepare dist folder
+        run: |
+          mkdir -p dist/assets
+          cp build/john_gospel_game.exe dist/ || true
+          cp native/*.dll dist/ 2>/dev/null || true
+          cp -r assets/* dist/assets/ || true
+
+      - name: Zip dist folder
+        run: |
+          cd dist
+          powershell Compress-Archive -Path * -DestinationPath ../dist-${{ github.ref_name }}-windows-latest.zip
+        shell: pwsh
+
+      - name: Upload to existing release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: dist-${{ github.ref_name }}-windows-latest.zip
+          asset_name: dist-${{ github.ref_name }}-windows-latest.zip
+          tag: ${{ github.ref_name }}
+          overwrite: true
