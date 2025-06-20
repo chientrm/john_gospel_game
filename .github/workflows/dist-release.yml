@@ -1,0 +1,72 @@
+name: Build and Upload Distributable
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up CMake
+        uses: jwlawson/actions-setup-cmake@v2
+
+      - name: Set up Dart
+        uses: dart-lang/setup-dart@v1
+
+      - name: Install SDL2 (Linux)
+        if: matrix.os == 'ubuntu-latest'
+        run: sudo apt-get update && sudo apt-get install -y libsdl2-dev
+
+      - name: Install SDL2 (macOS)
+        if: matrix.os == 'macos-latest'
+        run: brew install sdl2
+
+      - name: Install SDL2 (Windows)
+        if: matrix.os == 'windows-latest'
+        run: choco install sdl2
+
+      - name: Build native library
+        run: |
+          cd native
+          cmake .
+          cmake --build .
+          cd ..
+
+      - name: Build Dart executable
+        run: |
+          dart pub get
+          mkdir -p build
+          dart compile exe bin/john_gospel_game.dart -o build/john_gospel_game${{ matrix.os == 'windows-latest' && '.exe' || '' }}
+
+      - name: Prepare dist folder
+        run: |
+          mkdir -p dist/assets
+          cp build/john_gospel_game* dist/ || true
+          cp native/*.so dist/ 2>/dev/null || true
+          cp native/*.dylib dist/ 2>/dev/null || true
+          cp native/*.dll dist/ 2>/dev/null || true
+          cp -r assets/* dist/assets/ || true
+
+      - name: Zip dist folder
+        run: |
+          cd dist
+          zip -r ../dist-${{ github.ref_name }}-${{ matrix.os }}.zip .
+        shell: bash
+
+      - name: Upload to existing release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: dist-${{ github.ref_name }}-${{ matrix.os }}.zip
+          asset_name: dist-${{ github.ref_name }}-${{ matrix.os }}.zip
+          tag: ${{ github.ref_name }}
+          overwrite: true
