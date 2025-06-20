@@ -13,15 +13,7 @@ class MainMenuScreen extends Screen {
     // Draw a box for the title area
     drawBox(340, 40, 600, 70, 40, 40, 80, 200); // Centered for 1280 width
     // Title (centered)
-    drawTextCentered(
-      'Christian Lore Game',
-      60,
-      255,
-      255,
-      255,
-      255,
-      width: 1280,
-    );
+    drawTextCentered('John Gospel Lore', 60, 255, 255, 255, 255, width: 1280);
     // Subtitle (centered)
     drawTextCentered(
       'Discover, Learn, and Play!',

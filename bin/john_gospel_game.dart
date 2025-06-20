@@ -7,7 +7,7 @@ import 'package:john_gospel_game/screen.dart';
 import 'package:john_gospel_game/sdl_bindings.dart';
 
 void main() {
-  final title = 'Christian Lore Game'.toNativeUtf8();
+  final title = 'John Gospel Lore'.toNativeUtf8();
   // Resize window to 1280x720 for 16:9 widescreen
   if (createWindow(1280, 720, title.cast<ffi.Int8>()) == 0) {
     print('Failed to create window');
