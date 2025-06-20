@@ -4,3 +4,10 @@
 build/
 dist/
 *.so
+# Native build artifacts
+*.dylib
+*.dll
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
