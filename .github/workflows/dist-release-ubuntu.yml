@@ -50,7 +50,6 @@ jobs:
       - name: Upload to existing release
         uses: svenstaro/upload-release-action@v2
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: dist-${{ github.ref_name }}-ubuntu-latest.zip
           asset_name: dist-${{ github.ref_name }}-ubuntu-latest.zip
           tag: ${{ github.ref_name }}
