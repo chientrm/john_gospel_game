@@ -36,12 +36,12 @@ jobs:
 
       - name: Build native library
         # On macOS, Homebrew installs SDL2/SDL2_ttf headers and libraries in non-standard locations.
-        # We pass these paths directly to CMake so it can find them reliably.
+        # We pass the Homebrew prefix directly to CMake so it can find them reliably.
         run: |
           if [ "${{ matrix.os }}" = "macos-latest" ]; then
             BREW_PREFIX=$(brew --prefix)
             cd native
-            cmake . -DCMAKE_INCLUDE_PATH="$BREW_PREFIX/include" -DCMAKE_LIBRARY_PATH="$BREW_PREFIX/lib"
+            cmake . -DCMAKE_PREFIX_PATH="$BREW_PREFIX"
             cmake --build .
             cd ..
           else
