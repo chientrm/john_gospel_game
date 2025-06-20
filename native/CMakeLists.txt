@@ -28,8 +28,10 @@ if(WIN32)
     target_include_directories(${LIB_NAME} PRIVATE
         ${SDL2_INCLUDE_DIR}
         ${SDL2_INCLUDE_DIR}/SDL2
+        ${SDL2_INCLUDE_DIR}/..
         ${SDL2_TTF_INCLUDE_DIR}
         ${SDL2_TTF_INCLUDE_DIR}/SDL2
+        ${SDL2_TTF_INCLUDE_DIR}/..
     )
     target_link_libraries(${LIB_NAME} PRIVATE ${SDL2_LIBRARY} ${SDL2_TTF_LIBRARY})
 else()
