@@ -1,7 +1,9 @@
 name: Build and Upload Distributable (Windows)
 
 on:
-  workflow_dispatch:
+  push:
+    tags:
+      - "*"
 
 jobs:
   build:
@@ -48,13 +50,13 @@ jobs:
       - name: Zip dist folder
         run: |
           cd dist
-          powershell Compress-Archive -Path * -DestinationPath ../dist-${{ github.ref_name }}-windows-latest.zip
+          powershell Compress-Archive -Path * -DestinationPath ../dist-${{ github.ref_name }}-windows.zip
         shell: pwsh
 
       - name: Upload to existing release
         uses: svenstaro/upload-release-action@v2
         with:
-          file: dist-${{ github.ref_name }}-windows-latest.zip
-          asset_name: dist-${{ github.ref_name }}-windows-latest.zip
+          file: dist-${{ github.ref_name }}-windows.zip
+          asset_name: dist-${{ github.ref_name }}-windows.zip
           tag: ${{ github.ref_name }}
           overwrite: true
