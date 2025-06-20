@@ -4,6 +4,12 @@ project(sdl_utils C)
 # Find SDL2
 find_package(SDL2 REQUIRED)
 
+# On macOS, add Homebrew SDL2 include path for SDL2_ttf
+if(APPLE)
+    execute_process(COMMAND brew --prefix OUTPUT_VARIABLE BREW_PREFIX OUTPUT_STRIP_TRAILING_WHITESPACE)
+    include_directories(${BREW_PREFIX}/include/SDL2)
+endif()
+
 # Set output name and type based on platform
 set(LIB_NAME sdl_utils)
 if(WIN32)
