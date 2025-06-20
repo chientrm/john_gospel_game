@@ -43,8 +43,9 @@ jobs:
           cp build/john_gospel_game* dist/ || true
           cp native/*.so dist/ 2>/dev/null || true
           cp -r assets/* dist/assets/ || true
-          # Only bundle SDL2 and SDL2_ttf shared libraries
-          cp /usr/lib/x86_64-linux-gnu/libSDL2*.so* dist/ 2>/dev/null || true
+          # Copy and rename only the versioned SDL2 and SDL2_ttf .so files
+          cp /usr/lib/x86_64-linux-gnu/libSDL2-2.0.so.0.3000.0 dist/libSDL2.so
+          cp /usr/lib/x86_64-linux-gnu/libSDL2_ttf-2.0.so.0.2200.0 dist/libSDL2_ttf.so
 
       - name: Zip dist folder
         run: |
