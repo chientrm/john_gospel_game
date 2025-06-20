@@ -1,12 +1,7 @@
 name: Build and Upload Distributable (Windows)
 
 on:
-  push:
-    tags:
-      - "*"
-
-permissions:
-  contents: write
+  workflow_dispatch:
 
 jobs:
   build:

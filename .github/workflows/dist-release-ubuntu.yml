@@ -43,6 +43,9 @@ jobs:
           cp build/john_gospel_game* dist/ || true
           cp native/*.so dist/ 2>/dev/null || true
           cp -r assets/* dist/assets/ || true
+          # Bundle SDL2 and SDL2_ttf shared libraries
+          cp /usr/lib/x86_64-linux-gnu/libSDL2*.so* dist/ 2>/dev/null || true
+          ldd native/libsdl_utils.so | grep '=> /' | awk '{print $3}' | xargs -I '{}' cp -n '{}' dist/ 2>/dev/null || true
 
       - name: Zip dist folder
         run: |
