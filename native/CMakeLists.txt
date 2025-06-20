@@ -5,19 +5,11 @@ project(sdl_utils C)
 find_package(SDL2 REQUIRED)
 find_package(SDL2_ttf REQUIRED)
 
-# On macOS, add Homebrew SDL2 include path for SDL2/SDL2_ttf
-if(APPLE)
-    execute_process(COMMAND brew --prefix OUTPUT_VARIABLE BREW_PREFIX OUTPUT_STRIP_TRAILING_WHITESPACE)
-    include_directories(${BREW_PREFIX}/include/SDL2)
-endif()
-
 # Set output name and type based on platform
 set(LIB_NAME sdl_utils)
 if(WIN32)
     set(LIB_TYPE SHARED)
     set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
-elseif(APPLE)
-    set(LIB_TYPE MODULE)
 else()
     set(LIB_TYPE SHARED)
 endif()
@@ -32,8 +24,3 @@ set_target_properties(${LIB_NAME} PROPERTIES
     LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
 )
-
-# On macOS, ensure .dylib extension
-if(APPLE)
-    set_target_properties(${LIB_NAME} PROPERTIES SUFFIX ".dylib")
-endif()

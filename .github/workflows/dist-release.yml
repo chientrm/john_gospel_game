@@ -7,10 +7,11 @@ on:
 
 jobs:
   build:
+    if: matrix.os != 'macos-latest'
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu-latest, windows-latest]
 
     steps:
       - name: Checkout code
@@ -26,30 +27,16 @@ jobs:
         if: matrix.os == 'ubuntu-latest'
         run: sudo apt-get update && sudo apt-get install -y libsdl2-dev libsdl2-ttf-dev
 
-      - name: Install SDL2 (macOS)
-        if: matrix.os == 'macos-latest'
-        run: brew install sdl2 sdl2_ttf
-
       - name: Install SDL2 (Windows)
         if: matrix.os == 'windows-latest'
         run: choco install sdl2 sdl2-ttf
 
       - name: Build native library
-        # On macOS, Homebrew installs SDL2/SDL2_ttf headers and libraries in non-standard locations.
-        # We pass the Homebrew prefix directly to CMake so it can find them reliably.
         run: |
-          if [ "${{ matrix.os }}" = "macos-latest" ]; then
-            BREW_PREFIX=$(brew --prefix)
-            cd native
-            cmake . -DCMAKE_PREFIX_PATH="$BREW_PREFIX"
-            cmake --build .
-            cd ..
-          else
-            cd native
-            cmake .
-            cmake --build .
-            cd ..
-          fi
+          cd native
+          cmake .
+          cmake --build .
+          cd ..
 
       - name: Build Dart executable
         run: |
