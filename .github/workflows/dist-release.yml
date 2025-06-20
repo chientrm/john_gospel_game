@@ -36,6 +36,10 @@ jobs:
 
       - name: Build native library
         run: |
+          if [ "${{ matrix.os }}" = "macos-latest" ]; then
+            export CMAKE_INCLUDE_PATH="$(brew --prefix)/include"
+            export CMAKE_LIBRARY_PATH="$(brew --prefix)/lib"
+          fi
           cd native
           cmake .
           cmake --build .
