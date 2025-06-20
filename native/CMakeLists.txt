@@ -25,7 +25,12 @@ endif()
 add_library(${LIB_NAME} ${LIB_TYPE} sdl_utils.c)
 
 if(WIN32)
-    target_include_directories(${LIB_NAME} PRIVATE ${SDL2_INCLUDE_DIR} ${SDL2_TTF_INCLUDE_DIR})
+    target_include_directories(${LIB_NAME} PRIVATE
+        ${SDL2_INCLUDE_DIR}
+        ${SDL2_INCLUDE_DIR}/SDL2
+        ${SDL2_TTF_INCLUDE_DIR}
+        ${SDL2_TTF_INCLUDE_DIR}/SDL2
+    )
     target_link_libraries(${LIB_NAME} PRIVATE ${SDL2_LIBRARY} ${SDL2_TTF_LIBRARY})
 else()
     target_include_directories(${LIB_NAME} PRIVATE ${SDL2_INCLUDE_DIRS} ${SDL2_TTF_INCLUDE_DIRS})
