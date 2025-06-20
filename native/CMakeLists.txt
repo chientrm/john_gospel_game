@@ -1,10 +1,11 @@
 cmake_minimum_required(VERSION 3.5)
 project(sdl_utils C)
 
-# Find SDL2
+# Find SDL2 and SDL2_ttf
 find_package(SDL2 REQUIRED)
+find_package(SDL2_ttf REQUIRED)
 
-# On macOS, add Homebrew SDL2 include path for SDL2_ttf
+# On macOS, add Homebrew SDL2 include path for SDL2/SDL2_ttf
 if(APPLE)
     execute_process(COMMAND brew --prefix OUTPUT_VARIABLE BREW_PREFIX OUTPUT_STRIP_TRAILING_WHITESPACE)
     include_directories(${BREW_PREFIX}/include/SDL2)
@@ -23,8 +24,8 @@ endif()
 
 add_library(${LIB_NAME} ${LIB_TYPE} sdl_utils.c)
 
-target_include_directories(${LIB_NAME} PRIVATE ${SDL2_INCLUDE_DIRS})
-target_link_libraries(${LIB_NAME} PRIVATE ${SDL2_LIBRARIES})
+target_include_directories(${LIB_NAME} PRIVATE ${SDL2_INCLUDE_DIRS} ${SDL2_TTF_INCLUDE_DIRS})
+target_link_libraries(${LIB_NAME} PRIVATE ${SDL2_LIBRARIES} ${SDL2_TTF_LIBRARIES})
 
 # Set output directory to current (native/) folder
 set_target_properties(${LIB_NAME} PROPERTIES
