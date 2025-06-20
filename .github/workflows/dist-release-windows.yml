@@ -44,7 +44,7 @@ jobs:
         run: |
           mkdir -p dist/assets
           cp build/john_gospel_game.exe dist/ || true
-          cp native/*.dll dist/ 2>/dev/null || true
+          Copy-Item native\*.dll dist\ -ErrorAction SilentlyContinue
           cp -r assets/* dist/assets/ || true
 
       - name: Zip dist folder
