@@ -1,16 +1,18 @@
 class LoreScene {
   final String title;
-  final String intro;
-  final String summary;
+  final String? intro;
+  final String? summary;
+  final String? hint;
   final List<LoreChoice> choices;
-  final List<String> recitationSteps;
+  final List<String>? recitationSteps;
 
   LoreScene({
     required this.title,
-    required this.intro,
-    this.summary = '',
-    this.choices = const [],
-    this.recitationSteps = const [],
+    this.intro,
+    this.summary,
+    this.hint,
+    required this.choices,
+    this.recitationSteps,
   });
 }
 

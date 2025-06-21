@@ -7,8 +7,14 @@ final Map<String, LoreScene> johnGospelScenes = {
     intro:
         'Welcome to the beginning of John’s Gospel. Here, you’ll discover the mystery of the Word—Jesus—who existed from the very start and came to live among us.',
     summary:
-        'Summary: Jesus, the eternal Word, became flesh and lived among us, revealing God’s glory and grace.',
-    choices: [LoreChoice(label: 'Continue', nextSceneKey: 'testimony')],
+        'Jesus, the eternal Word, became flesh and lived among us, revealing God’s glory and grace. This sets the stage for all that follows.',
+    choices: [
+      LoreChoice(
+        label: 'What does "the Word" mean?',
+        nextSceneKey: 'prologue_word_quiz',
+      ),
+      LoreChoice(label: 'Continue', nextSceneKey: 'testimony'),
+    ],
     recitationSteps: [
       'In the beginning was the Word, and the Word was with God, and the Word was God. (John 1:1, NIV)',
       'He was with God in the beginning. (John 1:2, NIV)',
@@ -18,13 +24,39 @@ final Map<String, LoreScene> johnGospelScenes = {
       'The Word became flesh and made his dwelling among us. We have seen his glory, the glory of the one and only Son, who came from the Father, full of grace and truth. (John 1:14, NIV)',
     ],
   ),
+  'prologue_word_quiz': LoreScene(
+    title: 'Quiz: The Word',
+    intro: 'What does "the Word" refer to in John 1?',
+    summary: 'Test your understanding of the prologue.',
+    choices: [
+      LoreChoice(label: 'Jesus', nextSceneKey: 'testimony'),
+      LoreChoice(label: 'Moses', nextSceneKey: 'prologue_word_quiz_fail'),
+      LoreChoice(label: 'The Law', nextSceneKey: 'prologue_word_quiz_fail'),
+    ],
+    hint: 'The Word became flesh and lived among us.',
+  ),
+  'prologue_word_quiz_fail': LoreScene(
+    title: 'Incorrect',
+    intro: 'That is not correct. The Word refers to Jesus.',
+    choices: [
+      LoreChoice(label: 'Try again', nextSceneKey: 'prologue_word_quiz'),
+      LoreChoice(label: 'Continue', nextSceneKey: 'testimony'),
+    ],
+    hint: 'The Word is Jesus, who became flesh.',
+  ),
   'testimony': LoreScene(
     title: 'The Testimony of John the Baptist',
     intro:
         'John the Baptist’s mission was to prepare the way for someone greater. In this scene, witness how he points everyone to Jesus.',
     summary:
-        'Summary: John the Baptist identifies Jesus as the Lamb of God who takes away the sin of the world.',
-    choices: [LoreChoice(label: 'Continue', nextSceneKey: 'first_disciples')],
+        'John the Baptist identifies Jesus as the Lamb of God who takes away the sin of the world. Will you recognize him too?',
+    choices: [
+      LoreChoice(
+        label: 'Who is the Lamb of God?',
+        nextSceneKey: 'testimony_quiz',
+      ),
+      LoreChoice(label: 'Continue', nextSceneKey: 'first_disciples'),
+    ],
     recitationSteps: [
       'There was a man sent from God whose name was John. (John 1:6, NIV)',
       'He came as a witness to testify concerning that light, so that through him all might believe. (John 1:7, NIV)',
@@ -34,13 +66,42 @@ final Map<String, LoreScene> johnGospelScenes = {
       'I have seen and I testify that this is God’s Chosen One.” (John 1:34, NIV)',
     ],
   ),
+  'testimony_quiz': LoreScene(
+    title: 'Quiz: The Lamb of God',
+    intro: 'Who does John the Baptist call the Lamb of God?',
+    summary: 'Test your understanding of John’s testimony.',
+    choices: [
+      LoreChoice(label: 'Jesus', nextSceneKey: 'first_disciples'),
+      LoreChoice(
+        label: 'John the Baptist',
+        nextSceneKey: 'testimony_quiz_fail',
+      ),
+      LoreChoice(label: 'Moses', nextSceneKey: 'testimony_quiz_fail'),
+    ],
+    hint: 'John points to someone greater than himself.',
+  ),
+  'testimony_quiz_fail': LoreScene(
+    title: 'Incorrect',
+    intro: 'That is not correct. The Lamb of God is Jesus.',
+    choices: [
+      LoreChoice(label: 'Try again', nextSceneKey: 'testimony_quiz'),
+      LoreChoice(label: 'Continue', nextSceneKey: 'first_disciples'),
+    ],
+    hint: 'John the Baptist called Jesus the Lamb of God.',
+  ),
   'first_disciples': LoreScene(
     title: 'The First Disciples',
     intro:
         'Meet the first people who chose to follow Jesus. Their journey begins with curiosity and a simple invitation.',
     summary:
-        'Summary: The first disciples follow Jesus and begin their journey of faith.',
-    choices: [LoreChoice(label: 'Continue', nextSceneKey: 'sign_1')],
+        'The first disciples follow Jesus and begin their journey of faith. What does it mean to follow?',
+    choices: [
+      LoreChoice(
+        label: 'What did Jesus say to the disciples?',
+        nextSceneKey: 'first_disciples_quiz',
+      ),
+      LoreChoice(label: 'Continue', nextSceneKey: 'sign_1'),
+    ],
     recitationSteps: [
       'The next day John was there again with two of his disciples. (John 1:35, NIV)',
       'When he saw Jesus passing by, he said, “Look, the Lamb of God!” (John 1:36, NIV)',
@@ -52,25 +113,43 @@ final Map<String, LoreScene> johnGospelScenes = {
       'And he brought him to Jesus. (John 1:42, NIV)',
     ],
   ),
+  'first_disciples_quiz': LoreScene(
+    title: 'Quiz: Jesus’ Invitation',
+    intro: 'What invitation did Jesus give to the first disciples?',
+    summary: 'Test your understanding of the call to follow.',
+    choices: [
+      LoreChoice(label: 'Come and see', nextSceneKey: 'sign_1'),
+      LoreChoice(label: 'Go away', nextSceneKey: 'first_disciples_quiz_fail'),
+      LoreChoice(label: 'Wait here', nextSceneKey: 'first_disciples_quiz_fail'),
+    ],
+    hint: 'Jesus invited them to join him.',
+  ),
+  'first_disciples_quiz_fail': LoreScene(
+    title: 'Incorrect',
+    intro: 'That is not correct. Jesus said, "Come and see."',
+    choices: [
+      LoreChoice(label: 'Try again', nextSceneKey: 'first_disciples_quiz'),
+      LoreChoice(label: 'Continue', nextSceneKey: 'sign_1'),
+    ],
+    hint: 'Jesus invited the disciples to "Come and see."',
+  ),
   'sign_1': LoreScene(
     title: 'Sign 1: Water into Wine',
     intro:
         'At a wedding in Cana, the wine runs out. What does Jesus tell the servants to do?',
     summary:
-        'Jesus performs his first miracle, turning water into wine, revealing his glory.',
+        'Jesus performs his first miracle, turning water into wine, revealing his glory. What would you have done as a servant?',
     choices: [
       LoreChoice(
-        label: 'Fill the jars with water',
+        label: 'Fill the jars with water (Jesus\' instruction)',
         nextSceneKey: 'correct_sign_1',
-      ), // correct
+      ),
+      LoreChoice(label: 'Go buy more wine', nextSceneKey: 'incorrect_sign_1'),
+      LoreChoice(label: 'Leave the party', nextSceneKey: 'incorrect_sign_2'),
       LoreChoice(
-        label: 'Go buy more wine',
-        nextSceneKey: 'incorrect_sign_1',
-      ), // fail
-      LoreChoice(
-        label: 'Leave the party',
-        nextSceneKey: 'incorrect_sign_2',
-      ), // fail
+        label: 'Quiz: What was the miracle?',
+        nextSceneKey: 'sign_1_quiz',
+      ),
     ],
     recitationSteps: [
       'Jesus said to the servants, “Fill the jars with water”; so they filled them to the brim. (John 2:7, NIV)',
@@ -78,50 +157,42 @@ final Map<String, LoreScene> johnGospelScenes = {
       'Fun Fact: This is the first recorded miracle of Jesus in the Gospel of John!',
     ],
   ),
-  'correct_sign_1': LoreScene(
-    title: 'Sign 1: Water into Wine - Correct',
-    intro:
-        'The servants obey Jesus, and a miracle happens! The water is turned into wine.',
-    summary:
-        'Jesus performs his first miracle, turning water into wine, at the request of his mother, Mary.',
-    choices: [LoreChoice(label: 'Continue', nextSceneKey: 'sign_2')],
-    recitationSteps: [
-      'His mother said to the servants, “Do whatever he tells you.” (John 2:5, NIV)',
-      'Nearby stood six stone water jars, the kind used by the Jews for ceremonial washing, each holding from twenty to thirty gallons. (John 2:6, NIV)',
-      'Jesus said, “Fill the jars with water”; so they filled them to the brim. (John 2:7, NIV)',
-      'Then he told them, “Now draw some out and take it to the master of the banquet.” (John 2:8, NIV)',
-      'They did so, and the master of the banquet tasted the water that had been turned into wine. (John 2:9, NIV)',
-      'He did not realize where it had come from, though the servants who had drawn the water knew. (John 2:9, NIV)',
-      'Then he called the bridegroom aside and said, “Everyone brings out the choice wine first and then the cheaper wine after the guests have had too much to drink; but you have saved the best till now.” (John 2:10, NIV)',
+  'sign_1_quiz': LoreScene(
+    title: 'Quiz: Water into Wine',
+    intro: 'What miracle did Jesus perform at Cana?',
+    summary: 'Test your knowledge of the first sign.',
+    choices: [
+      LoreChoice(
+        label: 'Turned water into wine',
+        nextSceneKey: 'correct_sign_1',
+      ),
+      LoreChoice(label: 'Fed 5,000 people', nextSceneKey: 'sign_1_quiz_fail'),
+      LoreChoice(label: 'Healed a blind man', nextSceneKey: 'sign_1_quiz_fail'),
     ],
+    hint: 'It involved jars and a wedding.',
   ),
-  'incorrect_sign_1': LoreScene(
-    title: 'Incorrect: Go buy more wine',
-    intro:
-        'The servants leave to buy more wine, but miss witnessing the miracle. Try again!',
-    summary: 'You missed the miracle. What should the servants have done?',
-    choices: [LoreChoice(label: 'Try again', nextSceneKey: 'sign_1')],
-    recitationSteps: [
-      'Hint: Jesus gave a specific instruction involving water.',
+  'sign_1_quiz_fail': LoreScene(
+    title: 'Incorrect',
+    intro: 'That is not correct. Jesus turned water into wine.',
+    choices: [
+      LoreChoice(label: 'Try again', nextSceneKey: 'sign_1_quiz'),
+      LoreChoice(label: 'Continue', nextSceneKey: 'correct_sign_1'),
     ],
-  ),
-  'incorrect_sign_2': LoreScene(
-    title: 'Incorrect: Leave the party',
-    intro:
-        'The servants leave, but the story continues without them. Try again!',
-    summary: 'You missed the miracle. What should the servants have done?',
-    choices: [LoreChoice(label: 'Try again', nextSceneKey: 'sign_1')],
-    recitationSteps: [
-      'Hint: Jesus gave a specific instruction involving water.',
-    ],
+    hint: 'Jesus\' first miracle was turning water into wine.',
   ),
   'sign_2': LoreScene(
     title: 'Sign 2: Healing the Official’s Son',
     intro:
         'A desperate father seeks Jesus for help. See how faith and Jesus’ word bring healing—even from a distance.',
     summary:
-        'Summary: Jesus heals a royal official’s son by his word, demonstrating his authority and power.',
-    choices: [LoreChoice(label: 'Continue', nextSceneKey: 'sign_3')],
+        'Jesus heals a royal official’s son by his word, demonstrating his authority and power. What does this teach about faith?',
+    choices: [
+      LoreChoice(
+        label: 'What did Jesus say to the official?',
+        nextSceneKey: 'sign_2_quiz',
+      ),
+      LoreChoice(label: 'Continue', nextSceneKey: 'sign_3'),
+    ],
     recitationSteps: [
       '“Go,” Jesus replied, “your son will live.” The man took Jesus at his word and departed. (John 4:50, NIV)',
       'While he was still on the way, his servants met him with the news that his boy was living. (John 4:51, NIV)',
@@ -130,13 +201,39 @@ final Map<String, LoreScene> johnGospelScenes = {
       'So he and his whole household believed. (John 4:53, NIV)',
     ],
   ),
+  'sign_2_quiz': LoreScene(
+    title: 'Quiz: The Official\'s Son',
+    intro: 'What did Jesus say to the official?',
+    summary: 'Test your knowledge of the second sign.',
+    choices: [
+      LoreChoice(label: '\"Your son will live\"', nextSceneKey: 'sign_3'),
+      LoreChoice(label: '\"Go away\"', nextSceneKey: 'sign_2_quiz_fail'),
+      LoreChoice(label: '\"Wait here\"', nextSceneKey: 'sign_2_quiz_fail'),
+    ],
+    hint: 'Jesus spoke words of life.',
+  ),
+  'sign_2_quiz_fail': LoreScene(
+    title: 'Incorrect',
+    intro: 'That is not correct. Jesus said, "Your son will live."',
+    choices: [
+      LoreChoice(label: 'Try again', nextSceneKey: 'sign_2_quiz'),
+      LoreChoice(label: 'Continue', nextSceneKey: 'sign_3'),
+    ],
+    hint: 'Jesus said, "Your son will live."',
+  ),
   'sign_3': LoreScene(
     title: 'Sign 3: Healing at Bethesda',
     intro:
         'By the pool of Bethesda, a man waits for healing. Jesus approaches and changes his life forever.',
     summary:
-        'Summary: Jesus heals a man at Bethesda, showing his compassion and authority over the Sabbath.',
-    choices: [LoreChoice(label: 'Continue', nextSceneKey: 'sign_4')],
+        'Jesus heals a man at Bethesda, showing his compassion and authority over the Sabbath. What does this teach about mercy?',
+    choices: [
+      LoreChoice(
+        label: 'What did Jesus say to the man?',
+        nextSceneKey: 'sign_3_quiz',
+      ),
+      LoreChoice(label: 'Continue', nextSceneKey: 'sign_4'),
+    ],
     recitationSteps: [
       'One who was there had been an invalid for thirty-eight years. (John 5:5, NIV)',
       'When Jesus saw him lying there and learned that he had been in this condition for a long time, he asked him, “Do you want to get well?” (John 5:6, NIV)',
@@ -145,13 +242,46 @@ final Map<String, LoreScene> johnGospelScenes = {
       'The man who was healed had no idea who it was, for Jesus had slipped away into the crowd that was there. (John 5:13, NIV)',
     ],
   ),
+  'sign_3_quiz': LoreScene(
+    title: 'Quiz: Bethesda',
+    intro: 'What did Jesus say to the man at Bethesda?',
+    summary: 'Test your knowledge of the third sign.',
+    choices: [
+      LoreChoice(
+        label: 'Get up! Pick up your mat and walk.',
+        nextSceneKey: 'sign_4',
+      ),
+      LoreChoice(label: 'Go home.', nextSceneKey: 'sign_3_quiz_fail'),
+      LoreChoice(
+        label: 'Wait for the water to stir.',
+        nextSceneKey: 'sign_3_quiz_fail',
+      ),
+    ],
+    hint: 'Jesus gave a direct command.',
+  ),
+  'sign_3_quiz_fail': LoreScene(
+    title: 'Incorrect',
+    intro:
+        'That is not correct. Jesus said, "Get up! Pick up your mat and walk."',
+    choices: [
+      LoreChoice(label: 'Try again', nextSceneKey: 'sign_3_quiz'),
+      LoreChoice(label: 'Continue', nextSceneKey: 'sign_4'),
+    ],
+    hint: 'Jesus said, "Get up! Pick up your mat and walk."',
+  ),
   'sign_4': LoreScene(
     title: 'Sign 4: Feeding the 5,000',
     intro:
         'A huge crowd is hungry, but resources are few. Watch as Jesus provides more than enough for everyone.',
     summary:
-        'Summary: Jesus feeds five thousand, demonstrating his power to provide and his compassion for the crowd.',
-    choices: [LoreChoice(label: 'Continue', nextSceneKey: 'sign_5')],
+        'Jesus feeds five thousand, demonstrating his power to provide and his compassion for the crowd. What does this teach about trust?',
+    choices: [
+      LoreChoice(
+        label: 'How many baskets were left over?',
+        nextSceneKey: 'sign_4_quiz',
+      ),
+      LoreChoice(label: 'Continue', nextSceneKey: 'sign_5'),
+    ],
     recitationSteps: [
       'Jesus then took the loaves, gave thanks, and distributed to those who were seated as much as they wanted. (John 6:11, NIV)',
       'He did the same with the fish. They all ate as much as they wanted. (John 6:11, NIV)',
@@ -160,26 +290,81 @@ final Map<String, LoreScene> johnGospelScenes = {
       'After the people saw the sign Jesus performed, they began to say, “Surely this is the Prophet who is to come into the world.” (John 6:14, NIV)',
     ],
   ),
+  'sign_4_quiz': LoreScene(
+    title: 'Quiz: Feeding the 5,000',
+    intro: 'How many baskets of leftovers were collected?',
+    summary: 'Test your knowledge of the fourth sign.',
+    choices: [
+      LoreChoice(label: 'Twelve', nextSceneKey: 'sign_5'),
+      LoreChoice(label: 'Seven', nextSceneKey: 'sign_4_quiz_fail'),
+      LoreChoice(label: 'None', nextSceneKey: 'sign_4_quiz_fail'),
+    ],
+    hint: 'There was more than enough.',
+  ),
+  'sign_4_quiz_fail': LoreScene(
+    title: 'Incorrect',
+    intro: 'That is not correct. There were twelve baskets left over.',
+    choices: [
+      LoreChoice(label: 'Try again', nextSceneKey: 'sign_4_quiz'),
+      LoreChoice(label: 'Continue', nextSceneKey: 'sign_5'),
+    ],
+    hint: 'Twelve baskets were left over.',
+  ),
   'sign_5': LoreScene(
     title: 'Sign 5: Walking on Water',
     intro:
         'The disciples are caught in a storm on the lake. Jesus comes to them in a way that defies nature itself.',
     summary:
-        'Summary: Jesus walks on water, revealing his divine authority over nature and calming his disciples’ fears.',
-    choices: [LoreChoice(label: 'Continue', nextSceneKey: 'sign_6')],
+        'Jesus walks on water, revealing his divine authority over nature and calming his disciples’ fears. What does this teach about courage?',
+    choices: [
+      LoreChoice(
+        label: 'What did Jesus say to the disciples?',
+        nextSceneKey: 'sign_5_quiz',
+      ),
+      LoreChoice(label: 'Continue', nextSceneKey: 'sign_6'),
+    ],
     recitationSteps: [
       'When they had rowed about three or four miles, they saw Jesus approaching the boat, walking on the water; and they were frightened. (John 6:19, NIV)',
       'But he said to them, “It is I; don’t be afraid.” (John 6:20, NIV)',
       'Then they were willing to take him into the boat, and immediately the boat reached the shore where they were heading. (John 6:21, NIV)',
     ],
   ),
+  'sign_5_quiz': LoreScene(
+    title: 'Quiz: Walking on Water',
+    intro: 'What did Jesus say to his frightened disciples?',
+    summary: 'Test your knowledge of the fifth sign.',
+    choices: [
+      LoreChoice(label: 'It is I; don\'t be afraid.', nextSceneKey: 'sign_6'),
+      LoreChoice(
+        label: 'Why are you afraid?',
+        nextSceneKey: 'sign_5_quiz_fail',
+      ),
+      LoreChoice(label: 'Go back to shore.', nextSceneKey: 'sign_5_quiz_fail'),
+    ],
+    hint: 'Jesus reassured them.',
+  ),
+  'sign_5_quiz_fail': LoreScene(
+    title: 'Incorrect',
+    intro: 'That is not correct. Jesus said, "It is I; don\'t be afraid."',
+    choices: [
+      LoreChoice(label: 'Try again', nextSceneKey: 'sign_5_quiz'),
+      LoreChoice(label: 'Continue', nextSceneKey: 'sign_6'),
+    ],
+    hint: 'Jesus said, "It is I; don\'t be afraid."',
+  ),
   'sign_6': LoreScene(
     title: 'Sign 6: Healing the Man Born Blind',
     intro:
         'A man born blind encounters Jesus. This meeting will change his life and reveal who Jesus truly is.',
     summary:
-        'Summary: Jesus heals a man born blind, showing that he is the light of the world.',
-    choices: [LoreChoice(label: 'Continue', nextSceneKey: 'sign_7')],
+        'Jesus heals a man born blind, showing that he is the light of the world. What does this teach about spiritual sight?',
+    choices: [
+      LoreChoice(
+        label: 'What did Jesus use to heal the man?',
+        nextSceneKey: 'sign_6_quiz',
+      ),
+      LoreChoice(label: 'Continue', nextSceneKey: 'sign_7'),
+    ],
     recitationSteps: [
       'As he went along, he saw a man blind from birth. (John 9:1, NIV)',
       'His disciples asked him, “Rabbi, who sinned, this man or his parents, that he was born blind?” (John 9:2, NIV)',
@@ -190,13 +375,39 @@ final Map<String, LoreScene> johnGospelScenes = {
       'Some claimed that he was. Others said, “No, he only looks like him.” But he himself insisted, “I am the man.” (John 9:9, NIV)',
     ],
   ),
+  'sign_6_quiz': LoreScene(
+    title: 'Quiz: Man Born Blind',
+    intro: 'What did Jesus use to heal the man born blind?',
+    summary: 'Test your knowledge of the sixth sign.',
+    choices: [
+      LoreChoice(label: 'Mud made with saliva', nextSceneKey: 'sign_7'),
+      LoreChoice(label: 'Olive oil', nextSceneKey: 'sign_6_quiz_fail'),
+      LoreChoice(label: 'River water', nextSceneKey: 'sign_6_quiz_fail'),
+    ],
+    hint: 'Jesus made something with his hands.',
+  ),
+  'sign_6_quiz_fail': LoreScene(
+    title: 'Incorrect',
+    intro: 'That is not correct. Jesus used mud made with saliva.',
+    choices: [
+      LoreChoice(label: 'Try again', nextSceneKey: 'sign_6_quiz'),
+      LoreChoice(label: 'Continue', nextSceneKey: 'sign_7'),
+    ],
+    hint: 'Jesus used mud made with saliva.',
+  ),
   'sign_7': LoreScene(
     title: 'Sign 7: Raising Lazarus',
     intro:
         'Lazarus has died, and his family mourns. Jesus arrives and demonstrates his power over death itself.',
     summary:
-        'Summary: Jesus raises Lazarus from the dead, revealing his power over life and death.',
-    choices: [LoreChoice(label: 'Continue', nextSceneKey: 'last_supper')],
+        'Jesus raises Lazarus from the dead, revealing his power over life and death. What does this teach about hope?',
+    choices: [
+      LoreChoice(
+        label: 'What did Jesus say before raising Lazarus?',
+        nextSceneKey: 'sign_7_quiz',
+      ),
+      LoreChoice(label: 'Continue', nextSceneKey: 'last_supper'),
+    ],
     recitationSteps: [
       'Now a man named Lazarus was sick. He was from Bethany, the village of Mary and her sister Martha. (John 11:1, NIV)',
       'So the sisters sent word to Jesus, “Lord, the one you love is sick.” (John 11:3, NIV)',
@@ -251,8 +462,12 @@ final Map<String, LoreScene> johnGospelScenes = {
     intro:
         'On the night before his death, Jesus gathers with his disciples for a final meal and a lesson in humility.',
     summary:
-        'Summary: At the Last Supper, Jesus demonstrates servant leadership and commands his disciples to love one another.',
+        'At the Last Supper, Jesus demonstrates servant leadership and commands his disciples to love one another. What does it mean to serve others?',
     choices: [
+      LoreChoice(
+        label: 'What did Jesus do for his disciples?',
+        nextSceneKey: 'last_supper_quiz',
+      ),
       LoreChoice(label: 'Continue', nextSceneKey: 'farewell_discourses'),
     ],
     recitationSteps: [
@@ -260,50 +475,171 @@ final Map<String, LoreScene> johnGospelScenes = {
       'A new command I give you: Love one another. As I have loved you, so you must love one another. (John 13:34, NIV)',
     ],
   ),
+  'last_supper_quiz': LoreScene(
+    title: 'Quiz: The Last Supper',
+    intro: 'What act of service did Jesus perform for his disciples?',
+    summary: 'Test your knowledge of the Last Supper.',
+    choices: [
+      LoreChoice(
+        label: 'Washed their feet',
+        nextSceneKey: 'farewell_discourses',
+      ),
+      LoreChoice(
+        label: 'Gave them gold',
+        nextSceneKey: 'last_supper_quiz_fail',
+      ),
+      LoreChoice(
+        label: 'Sent them away',
+        nextSceneKey: 'last_supper_quiz_fail',
+      ),
+    ],
+    hint: 'It involved water and humility.',
+  ),
+  'last_supper_quiz_fail': LoreScene(
+    title: 'Incorrect',
+    intro: 'That is not correct. Jesus washed their feet.',
+    choices: [
+      LoreChoice(label: 'Try again', nextSceneKey: 'last_supper_quiz'),
+      LoreChoice(label: 'Continue', nextSceneKey: 'farewell_discourses'),
+    ],
+    hint: 'Jesus washed the disciples\' feet.',
+  ),
   'farewell_discourses': LoreScene(
     title: 'Farewell Discourses',
     intro:
         'Jesus prepares his disciples for what is to come, offering comfort, hope, and a promise of the Holy Spirit.',
     summary:
-        'Summary: Jesus comforts his disciples, promises the Holy Spirit, and prays for all believers.',
-    choices: [LoreChoice(label: 'Continue', nextSceneKey: 'passion')],
+        'Jesus comforts his disciples, promises the Holy Spirit, and prays for all believers. What does this teach about comfort and faith?',
+    choices: [
+      LoreChoice(
+        label: 'What did Jesus promise his followers?',
+        nextSceneKey: 'farewell_discourses_quiz',
+      ),
+      LoreChoice(label: 'Continue', nextSceneKey: 'passion'),
+    ],
     recitationSteps: [
       'And I will ask the Father, and he will give you another advocate to help you and be with you forever—the Spirit of truth. (John 14:16-17, NIV)',
       'My prayer is not for them alone. I pray also for those who will believe in me through their message. (John 17:20, NIV)',
     ],
+  ),
+  'farewell_discourses_quiz': LoreScene(
+    title: 'Quiz: Farewell Discourses',
+    intro: 'What did Jesus promise to send to his followers?',
+    summary: 'Test your knowledge of the Farewell Discourses.',
+    choices: [
+      LoreChoice(label: 'The Holy Spirit', nextSceneKey: 'passion'),
+      LoreChoice(
+        label: 'A new law',
+        nextSceneKey: 'farewell_discourses_quiz_fail',
+      ),
+      LoreChoice(
+        label: 'A kingdom on earth',
+        nextSceneKey: 'farewell_discourses_quiz_fail',
+      ),
+    ],
+    hint: 'Jesus called him the Advocate.',
+  ),
+  'farewell_discourses_quiz_fail': LoreScene(
+    title: 'Incorrect',
+    intro: 'That is not correct. Jesus promised the Holy Spirit.',
+    choices: [
+      LoreChoice(label: 'Try again', nextSceneKey: 'farewell_discourses_quiz'),
+      LoreChoice(label: 'Continue', nextSceneKey: 'passion'),
+    ],
+    hint: 'Jesus promised the Holy Spirit.',
   ),
   'passion': LoreScene(
     title: 'The Passion',
     intro:
         'Jesus faces betrayal, suffering, and death, fulfilling his mission to save the world.',
     summary:
-        'Summary: Jesus willingly suffers, is crucified, and is buried to fulfill God’s plan of salvation.',
-    choices: [LoreChoice(label: 'Continue', nextSceneKey: 'resurrection')],
+        'Jesus willingly suffers, is crucified, and is buried to fulfill God’s plan of salvation. What does this teach about sacrifice?',
+    choices: [
+      LoreChoice(
+        label: 'What did Jesus say on the cross?',
+        nextSceneKey: 'passion_quiz',
+      ),
+      LoreChoice(label: 'Continue', nextSceneKey: 'resurrection'),
+    ],
     recitationSteps: [
       'So the soldiers took charge of Jesus. Carrying his own cross, he went out to the place of the Skull. (John 19:16-17, NIV)',
       'When he had received the drink, Jesus said, “It is finished.” With that, he bowed his head and gave up his spirit. (John 19:30, NIV)',
     ],
+  ),
+  'passion_quiz': LoreScene(
+    title: 'Quiz: The Passion',
+    intro: 'What were Jesus\' last words on the cross?',
+    summary: 'Test your knowledge of the Passion.',
+    choices: [
+      LoreChoice(label: 'It is finished.', nextSceneKey: 'resurrection'),
+      LoreChoice(label: 'I am thirsty.', nextSceneKey: 'passion_quiz_fail'),
+      LoreChoice(
+        label: 'Father, forgive them.',
+        nextSceneKey: 'passion_quiz_fail',
+      ),
+    ],
+    hint: 'It marked the completion of his mission.',
+  ),
+  'passion_quiz_fail': LoreScene(
+    title: 'Incorrect',
+    intro: 'That is not correct. Jesus said, "It is finished."',
+    choices: [
+      LoreChoice(label: 'Try again', nextSceneKey: 'passion_quiz'),
+      LoreChoice(label: 'Continue', nextSceneKey: 'resurrection'),
+    ],
+    hint: 'Jesus said, "It is finished."',
   ),
   'resurrection': LoreScene(
     title: 'The Resurrection',
     intro:
         'The tomb is empty! Jesus is alive, and his followers encounter the risen Lord.',
     summary:
-        'Summary: Jesus rises from the dead, appearing to Mary Magdalene and his disciples, bringing hope and new life.',
-    choices: [LoreChoice(label: 'Continue', nextSceneKey: 'epilogue')],
+        'Jesus rises from the dead, appearing to Mary Magdalene and his disciples, bringing hope and new life. What does this teach about victory and new beginnings?',
+    choices: [
+      LoreChoice(
+        label: 'Who did Jesus appear to first?',
+        nextSceneKey: 'resurrection_quiz',
+      ),
+      LoreChoice(label: 'Continue', nextSceneKey: 'epilogue'),
+    ],
     recitationSteps: [
       'He is not here; he has risen! (John 20:13, NIV)',
       'Jesus said, “Peace be with you! As the Father has sent me, I am sending you.” (John 20:21, NIV)',
     ],
   ),
-  // Epilogue
+  'resurrection_quiz': LoreScene(
+    title: 'Quiz: The Resurrection',
+    intro: 'Who was the first to see the risen Jesus?',
+    summary: 'Test your knowledge of the Resurrection.',
+    choices: [
+      LoreChoice(label: 'Mary Magdalene', nextSceneKey: 'epilogue'),
+      LoreChoice(label: 'Peter', nextSceneKey: 'resurrection_quiz_fail'),
+      LoreChoice(label: 'John', nextSceneKey: 'resurrection_quiz_fail'),
+    ],
+    hint: 'She went to the tomb early in the morning.',
+  ),
+  'resurrection_quiz_fail': LoreScene(
+    title: 'Incorrect',
+    intro: 'That is not correct. Mary Magdalene saw Jesus first.',
+    choices: [
+      LoreChoice(label: 'Try again', nextSceneKey: 'resurrection_quiz'),
+      LoreChoice(label: 'Continue', nextSceneKey: 'epilogue'),
+    ],
+    hint: 'Mary Magdalene was the first to see the risen Jesus.',
+  ),
   'epilogue': LoreScene(
     title: 'Epilogue: By the Sea',
     intro:
         'After his resurrection, Jesus appears to his disciples by the sea and restores Peter’s calling.',
     summary:
-        'Summary: Jesus restores Peter and calls his disciples to follow him and care for his people.',
-    choices: [LoreChoice(label: 'Finish', nextSceneKey: null)],
+        'Jesus restores Peter and calls his disciples to follow him and care for his people. What does it mean to follow Jesus today?',
+    choices: [
+      LoreChoice(
+        label: 'Reflect: What does it mean to follow?',
+        nextSceneKey: null,
+      ),
+      LoreChoice(label: 'Finish', nextSceneKey: null),
+    ],
     recitationSteps: [
       'Jesus said, “Simon son of John, do you love me?” ... “Feed my sheep.” (John 21:17, NIV)',
       'Then he said to him, “Follow me!” (John 21:19, NIV)',

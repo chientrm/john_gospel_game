@@ -27,9 +27,24 @@ class LoreSceneScreen extends Screen {
     drawHLine(200, 1080, 110, 255, 255, 255, 255); // Wider line
     drawBox(180, 140, 920, 260, 40, 40, 60, 180); // Wider box
 
+    // Show intro if present and at start
     if (recitationStep == -1) {
-      // Show intro text
-      drawWrappedText(scene.intro, 200, 170, 880, 36, 220, 220, 255, 255);
+      if (scene.intro != null && scene.intro!.isNotEmpty) {
+        drawWrappedText(scene.intro!, 200, 170, 880, 36, 220, 220, 255, 255);
+      }
+      if (scene.hint != null && scene.hint!.isNotEmpty) {
+        drawWrappedText(
+          'Hint: ' + scene.hint!,
+          200,
+          350,
+          880,
+          32,
+          180,
+          180,
+          255,
+          255,
+        );
+      }
       drawTextCentered(
         "(Press any key to begin recitation, 'q' to quit)",
         440,
@@ -39,10 +54,11 @@ class LoreSceneScreen extends Screen {
         255,
         width: 1280,
       );
-    } else if (scene.recitationSteps.isNotEmpty &&
-        recitationStep < scene.recitationSteps.length) {
+    } else if (scene.recitationSteps != null &&
+        scene.recitationSteps!.isNotEmpty &&
+        recitationStep < scene.recitationSteps!.length) {
       drawWrappedText(
-        scene.recitationSteps[recitationStep],
+        scene.recitationSteps![recitationStep],
         200,
         170,
         880,
@@ -53,7 +69,7 @@ class LoreSceneScreen extends Screen {
         255,
       );
       String progress =
-          'Step ${recitationStep + 1} of ${scene.recitationSteps.length}';
+          'Step ${recitationStep + 1} of ${scene.recitationSteps!.length}';
       drawTextCentered(progress, 500, 220, 255, 255, 255, width: 1280);
       drawTextCentered(
         "(Press any key for next step, 'q' to quit)",
@@ -64,10 +80,25 @@ class LoreSceneScreen extends Screen {
         255,
         width: 1280,
       );
-    } else if (scene.summary.isNotEmpty &&
-        recitationStep == scene.recitationSteps.length) {
+    } else if (scene.summary != null &&
+        scene.summary!.isNotEmpty &&
+        (scene.recitationSteps == null ||
+            recitationStep == (scene.recitationSteps?.length ?? 0))) {
       // After recitation, show summary if available
-      drawWrappedText(scene.summary, 200, 170, 880, 36, 180, 255, 180, 255);
+      drawWrappedText(scene.summary!, 200, 170, 880, 36, 180, 255, 180, 255);
+      if (scene.hint != null && scene.hint!.isNotEmpty) {
+        drawWrappedText(
+          'Hint: ' + scene.hint!,
+          200,
+          350,
+          880,
+          32,
+          180,
+          180,
+          255,
+          255,
+        );
+      }
       if (scene.choices.isNotEmpty) {
         int y = 600;
         for (var i = 0; i < scene.choices.length; i++) {
@@ -104,6 +135,19 @@ class LoreSceneScreen extends Screen {
       }
     } else {
       // After recitation, show choices
+      if (scene.hint != null && scene.hint!.isNotEmpty) {
+        drawWrappedText(
+          'Hint: ' + scene.hint!,
+          200,
+          350,
+          880,
+          32,
+          180,
+          180,
+          255,
+          255,
+        );
+      }
       drawTextCentered(
         'Choose an option:',
         500,
@@ -143,31 +187,33 @@ class LoreSceneScreen extends Screen {
     }
     if (recitationStep == -1) {
       // Move to first recitation step
-      if (scene.recitationSteps.isNotEmpty) {
+      if (scene.recitationSteps != null && scene.recitationSteps!.isNotEmpty) {
         return LoreSceneScreen(sceneKey, recitationStep: 0);
       } else {
         // No recitation steps, go to summary or choices
         return LoreSceneScreen(
           sceneKey,
-          recitationStep: scene.recitationSteps.length,
+          recitationStep: scene.recitationSteps?.length ?? 0,
         );
       }
     }
-    if (scene.recitationSteps.isNotEmpty &&
-        recitationStep < scene.recitationSteps.length) {
-      if (recitationStep + 1 < scene.recitationSteps.length) {
+    if (scene.recitationSteps != null &&
+        scene.recitationSteps!.isNotEmpty &&
+        recitationStep < scene.recitationSteps!.length) {
+      if (recitationStep + 1 < scene.recitationSteps!.length) {
         return LoreSceneScreen(sceneKey, recitationStep: recitationStep + 1);
       } else {
         // Finished recitation, go to summary or choices
         return LoreSceneScreen(
           sceneKey,
-          recitationStep: scene.recitationSteps.length,
+          recitationStep: scene.recitationSteps!.length,
         );
       }
     }
     // After recitation, if summary is present, show summary first
-    if (scene.summary.isNotEmpty &&
-        recitationStep == scene.recitationSteps.length) {
+    if (scene.summary != null &&
+        scene.summary!.isNotEmpty &&
+        recitationStep == (scene.recitationSteps?.length ?? 0)) {
       // If only one choice, only Enter advances
       if (scene.choices.length == 1) {
         if (key == 13) {
@@ -181,7 +227,7 @@ class LoreSceneScreen extends Screen {
       // Otherwise, next key press goes to choices
       return LoreSceneScreen(
         sceneKey,
-        recitationStep: scene.recitationSteps.length + 1,
+        recitationStep: (scene.recitationSteps?.length ?? 0) + 1,
       );
     }
     // Only allow valid choice keys after summary/recitation
