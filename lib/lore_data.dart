@@ -16,7 +16,7 @@ class LoreScene {
 
 class LoreChoice {
   final String label;
-  final int nextSceneIndex;
+  final String? nextSceneKey;
 
-  LoreChoice({required this.label, required this.nextSceneIndex});
+  LoreChoice({required this.label, required this.nextSceneKey});
 }
