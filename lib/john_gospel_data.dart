@@ -11,7 +11,44 @@ final Map<String, LoreScene> johnGospelScenes = {
         nextSceneKey: 'prologue_word_quiz',
       ),
       LoreChoice(label: 'Continue', nextSceneKey: 'testimony'),
+      LoreChoice(
+        label: 'Look for a secret message',
+        nextSceneKey: 'prologue_secret',
+      ),
     ],
+  ),
+  'prologue_secret': LoreScene(
+    text:
+        'You notice a hidden acrostic in the first letters of each verse... It spells "JESUS"!\n\nCongratulations, you found a secret.\n\nDo you want to share this with a friend or keep it to yourself?',
+    choices: [
+      LoreChoice(label: 'Share with a friend', nextSceneKey: 'prologue_share'),
+      LoreChoice(label: 'Keep it secret', nextSceneKey: 'testimony'),
+    ],
+  ),
+  'prologue_share': LoreScene(
+    text:
+        'You share the secret with a friend. They are amazed and want to learn more!\n\nYou both continue your journey together.',
+    choices: [LoreChoice(label: 'Continue', nextSceneKey: 'testimony')],
+  ),
+  'testimony': LoreScene(
+    text:
+        'The Testimony of John the Baptist\n\nJohn the Baptist’s mission was to prepare the way for someone greater. In this scene, witness how he points everyone to Jesus.\n\nJohn the Baptist identifies Jesus as the Lamb of God who takes away the sin of the world. Will you recognize him too?',
+    choices: [
+      LoreChoice(
+        label: 'Who is the Lamb of God?',
+        nextSceneKey: 'testimony_quiz',
+      ),
+      LoreChoice(label: 'Continue', nextSceneKey: 'first_disciples'),
+      LoreChoice(
+        label: 'Ask John for advice',
+        nextSceneKey: 'testimony_advice',
+      ),
+    ],
+  ),
+  'testimony_advice': LoreScene(
+    text:
+        'John says: "Prepare your heart, be honest, and look for the light in every situation."\n\nYou feel encouraged!',
+    choices: [LoreChoice(label: 'Back', nextSceneKey: 'testimony')],
   ),
   'prologue_word_quiz': LoreScene(
     text:
@@ -28,17 +65,6 @@ final Map<String, LoreScene> johnGospelScenes = {
     choices: [
       LoreChoice(label: 'Try again', nextSceneKey: 'prologue_word_quiz'),
       LoreChoice(label: 'Continue', nextSceneKey: 'testimony'),
-    ],
-  ),
-  'testimony': LoreScene(
-    text:
-        'The Testimony of John the Baptist\n\nJohn the Baptist’s mission was to prepare the way for someone greater. In this scene, witness how he points everyone to Jesus.\n\nJohn the Baptist identifies Jesus as the Lamb of God who takes away the sin of the world. Will you recognize him too?',
-    choices: [
-      LoreChoice(
-        label: 'Who is the Lamb of God?',
-        nextSceneKey: 'testimony_quiz',
-      ),
-      LoreChoice(label: 'Continue', nextSceneKey: 'first_disciples'),
     ],
   ),
   'testimony_quiz': LoreScene(
