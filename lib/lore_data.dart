@@ -1,19 +1,8 @@
 class LoreScene {
-  final String title;
-  final String? intro;
-  final String? summary;
-  final String? hint;
+  final String text;
   final List<LoreChoice> choices;
-  final List<String>? recitationSteps;
 
-  LoreScene({
-    required this.title,
-    this.intro,
-    this.summary,
-    this.hint,
-    required this.choices,
-    this.recitationSteps,
-  });
+  LoreScene({required this.text, required this.choices});
 }
 
 class LoreChoice {

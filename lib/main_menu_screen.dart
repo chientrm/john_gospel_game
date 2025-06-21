@@ -50,8 +50,11 @@ class MainMenuScreen extends Screen {
       final color =
           i == selectedIndex ? [255, 255, 180, 255] : [180, 200, 255, 255];
       final scene = johnGospelScenes[sceneKeys[i]];
+      // Use the first line of text as the menu label
+      String label =
+          scene != null ? scene.text.split('\n').first.trim() : sceneKeys[i];
       drawTextCentered(
-        '${i + 1}. ${scene?.title ?? sceneKeys[i]}',
+        '${i + 1}. $label',
         y,
         color[0],
         color[1],
