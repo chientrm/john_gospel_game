@@ -29,6 +29,7 @@ class LoreSceneScreen extends Screen {
 
     // Show intro if present and at start
     if (recitationStep == -1) {
+      drawTextCentered('[Intro]', 130, 180, 220, 255, 255, width: 1280);
       if (scene.intro != null && scene.intro!.isNotEmpty) {
         drawWrappedText(scene.intro!, 200, 170, 880, 36, 220, 220, 255, 255);
       }
@@ -57,6 +58,15 @@ class LoreSceneScreen extends Screen {
     } else if (scene.recitationSteps != null &&
         scene.recitationSteps!.isNotEmpty &&
         recitationStep < scene.recitationSteps!.length) {
+      drawTextCentered(
+        '[Step ${recitationStep + 1} of ${scene.recitationSteps!.length}]',
+        130,
+        220,
+        220,
+        255,
+        255,
+        width: 1280,
+      );
       drawWrappedText(
         scene.recitationSteps![recitationStep],
         200,
@@ -68,9 +78,6 @@ class LoreSceneScreen extends Screen {
         255,
         255,
       );
-      String progress =
-          'Step ${recitationStep + 1} of ${scene.recitationSteps!.length}';
-      drawTextCentered(progress, 500, 220, 255, 255, 255, width: 1280);
       drawTextCentered(
         "(Press any key for next step, 'q' to quit)",
         540,
@@ -84,7 +91,7 @@ class LoreSceneScreen extends Screen {
         scene.summary!.isNotEmpty &&
         (scene.recitationSteps == null ||
             recitationStep == (scene.recitationSteps?.length ?? 0))) {
-      // After recitation, show summary if available
+      drawTextCentered('[Summary]', 130, 180, 255, 220, 255, width: 1280);
       drawWrappedText(scene.summary!, 200, 170, 880, 36, 180, 255, 180, 255);
       if (scene.hint != null && scene.hint!.isNotEmpty) {
         drawWrappedText(
